@@ -1,0 +1,38 @@
+{"intents": [
+        { "tag": "start_conversation",
+          "patterns": ["Hi there", "Is anyone there?","Hey","Hola", "Hello", "Good day","Hi"],
+          "responses": ["Hello", "Happy to have you here", "Good to see you again", "Hi there, how can I help?"],
+          "context": [""]
+        },
+	    { "tag": "what_are_you",
+          "patterns": ["What is your name?", "what are you?", "who are you?","your name pls?"],
+          "responses": ["Hi, I'm  Bowhead Bot", "I'm Bowhead Bot ", "Call me Bowhead Bot"],
+          "context": [""]
+        },
+        { "tag": "end_conversation",
+          "patterns": ["Bye", "See you later", "Goodbye", "Nice chatting to you, bye", "Till next time"],
+          "responses": ["Have a lovely Day!", "Bye", "Buhbyee !","Happy to help you"],
+          "context": [""]
+        },
+        { "tag": "thanks",
+          "patterns": ["Thanks", "Thank you", "That's helpful", "Awesome, thanks", "Thanks for helping me"],
+          "responses": ["Happy to help!", "Any time!", "My pleasure","Have fun"],
+          "context": [""]
+        },
+        { "tag": "confused",
+          "patterns": [],
+          "responses": ["Sorry, kindly rephrase the question","Sorry, can't understand you", "Please give me more information", "Not sure I understand"],
+          "context": [""]
+        },
+        { "tag": "options",
+          "patterns": ["How can you help me?", "What can you do?", "What help you provide?", "How can you be helpful?", "What support do you offered","What do you know?","what help?","What are you about?"],
+          "responses": ["I can help you get to know more about Bowhead Health and the services we provide, in particular, I can help you find Covid trails suitable to your needs"],
+          "context": [""]
+        },
+        { "tag": "covid_trials",
+          "patterns": ["What can you tell me about covid trials", "I need some info about covid trials", "Covid trials info needed", "I want to know about covid trials", "Show me covid trials info"],
+          "responses": ["Sure let me get that info for you", "I will get that info for you", "Getting the covid trails info", "Gathering the trials information "],
+          "context": [""]
+        }
+   ]
+}
