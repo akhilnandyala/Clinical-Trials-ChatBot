@@ -8,9 +8,9 @@ from PIL import Image
 import streamlit as st
 
 # paths
-img_path = Path.joinpath(Path.cwd(), 'images')
-artifacts_path = Path.joinpath(Path.cwd(), 'model_artifacts')
-datasets_path = Path.joinpath(Path.cwd(), 'dataset')
+# img_path = Path.joinpath(Path.cwd(), 'images')
+# artifacts_path = Path.joinpath(Path.cwd(), 'model_artifacts')
+# datasets_path = Path.joinpath(Path.cwd(), 'dataset')
 
 # load images
 # center = Image.open(Path.joinpath(img_path, 'center.jpg'))
@@ -18,11 +18,11 @@ datasets_path = Path.joinpath(Path.cwd(), 'dataset')
 # nadal = Image.open(Path.joinpath(img_path, 'Nadal.jpg'))
 
 # load artifacts
-model = load_model(Path.joinpath(artifacts_path, 'model-v1.h5'))
-tokenizer_t = joblib.load(Path.joinpath(artifacts_path, 'tokenizer_t.pkl'))
-vocab = joblib.load(Path.joinpath(artifacts_path, 'vocab.pkl'))
+model = load_model(Path.joinpath(Path.cwd(), 'model-v1.h5'))
+tokenizer_t = joblib.load(Path.joinpath(Path.cwd(), 'tokenizer_t.pkl'))
+vocab = joblib.load(Path.joinpath(Path.cwd(), 'vocab.pkl'))
 
-df2 = pd.read_csv(Path.joinpath(datasets_path, 'response.csv'))
+df2 = pd.read_csv(Path.joinpath(Path.cwd(), 'responses.csv'))
 
 
 def get_pred(model, encoded_input):
