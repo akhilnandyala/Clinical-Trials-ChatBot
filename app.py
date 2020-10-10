@@ -40,7 +40,7 @@ def bot_precausion(df_input, pred):
 def get_response(df2, pred):
     upper_bound = df2.groupby('labels').get_group(pred).shape[0]
     r = np.random.randint(0, upper_bound)
-    responses = list(df2.groupby('labels').get_group(pred).response)
+    responses = list(df2.groupby('labels').get_group(pred).responses)
     return responses[r]
 
 
