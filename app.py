@@ -59,21 +59,16 @@ def botResponse(user_input, ):
     pred = bot_precausion(df_input, pred)
 
     response = get_response(df2, pred)
-    if pred == 1:
-        u.user_info()
-        question = 'Can you let me know your location ?'
+    if question_type != 0 and pred == 0:
+        question = 'Hi, please enter you name'
         response = question
-        return response
+        return response, 0
+    elif question_type != 1 and pred == 1:
+        question = 'Please enter your location ?'
+        response = question
+        return response, 1
     else:
         response = bot_response(response)
-
-    # if is_startup:
-    #     response = "Hi, I'm happy to have you here \nI am Bowhead Bot"
-    #     is_startup = False
-    #     return response
-    #
-    # else:
-    #     return response
         return response
 
 
@@ -94,7 +89,12 @@ Bowhead Bot's main functionality is to help you find the info about the trials y
 # st.sidebar.image(nadal, width=350)
 user_input = get_text()
 response = botResponse(user_input)
-st.text_area("Bot:", value=response, height=200, max_chars=None, key=None)
+if type(response) == tuple:
+    response = response[0]
+    question_type = response[1]
+else:
+    response = response
+st.text_area("Bot:", "Hi, please enter your name", value=response, height=200, max_chars=None, key=None)
 
 
 
