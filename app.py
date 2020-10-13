@@ -76,9 +76,9 @@ Bowhead Bot
 Bowhead Bot's main functionality is to help you find the info about the trials you need
 """)
 st.write('Please enter you name')
-user_name = st.text_input('You')
+user_name = st.text_input('You', key=1)
 st.write('Please enter your location')
-user_location = st.text_input('You')
+user_location = st.text_input('You', key=2)
 
 # st.image(center, width=700)
 # st.sidebar.image(federer_image)
