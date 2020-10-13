@@ -3,8 +3,6 @@ import streamlit as st
 
 
 def user_info():
-    question = 'let me get some basic info before I can help you with your query'
-    display_output(question)
     question = 'Can you let me know your location ?'
     display_output(question)
     user_location = take_input()

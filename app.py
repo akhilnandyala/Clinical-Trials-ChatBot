@@ -7,6 +7,7 @@ from pathlib import Path
 from PIL import Image
 import streamlit as st
 import user_info as u
+import geograpy
 
 # paths
 # img_path = Path.joinpath(Path.cwd(), 'images')
@@ -61,7 +62,11 @@ def botResponse(user_input, ):
     response = get_response(df2, pred)
     if pred == 1:
         u.user_info()
-    response = bot_response(response)
+        question = 'Can you let me know your location ?'
+        response = question
+        return response
+    else:
+        response = bot_response(response)
 
     # if is_startup:
     #     response = "Hi, I'm happy to have you here \nI am Bowhead Bot"
@@ -70,7 +75,7 @@ def botResponse(user_input, ):
     #
     # else:
     #     return response
-    return response
+        return response
 
 
 def get_text():
