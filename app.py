@@ -59,17 +59,9 @@ def botResponse(user_input, ):
     pred = bot_precausion(df_input, pred)
 
     response = get_response(df2, pred)
-    if question_type != 0 and pred == 0:
-        question = 'Hi, please enter you name'
-        response = question
-        return response, 0
-    elif question_type != 1 and pred == 1:
-        question = 'Please enter your location ?'
-        response = question
-        return response, 1
-    else:
-        response = bot_response(response)
-        return response
+    response = bot_response(response)
+
+    return response
 
 
 def get_text():
@@ -83,18 +75,17 @@ st.title("""
 Bowhead Bot  
 Bowhead Bot's main functionality is to help you find the info about the trials you need
 """)
+st.write('Please enter you name')
+user_name = st.text_input()
+st.write('Please enter your location')
+user_location = st.text_input()
 
 # st.image(center, width=700)
 # st.sidebar.image(federer_image)
 # st.sidebar.image(nadal, width=350)
 user_input = get_text()
 response = botResponse(user_input)
-if type(response) == tuple:
-    response = response[0]
-    question_type = response[1]
-else:
-    response = response
-st.text_area("Bot:", "Hi, please enter your name", value=response, height=200, max_chars=None, key=None)
+st.text_area("Bot:", "Hi how can i help you", value=response, height=200, max_chars=None, key=None)
 
 
 
