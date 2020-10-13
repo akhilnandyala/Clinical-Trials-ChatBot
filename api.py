@@ -29,12 +29,12 @@ def jprint(obj):
 # }
 
 response = requests.get("http://ClinicalTrials.gov/api/query/study_fields?expr=COVID-19&fields=NCTId,Condition,BriefTitle&fmt=JSON")
-print(response.status_code)
-print(response.json())
+# print(response.status_code)
+# print(response.json())
 
 response = requests.get("http://ClinicalTrials.gov/api/query/study_fields?expr=Coronavirus+COVID&fields=LocationCity&SEARCH[Location](AREA[LocationCity] Bethesda AND AREA[LocationState] Maryland)&fmt=JSON")
-print(response.status_code)
-print(response.json())
+# print(response.status_code)
+# print(response.json())
 
 from pytrials.client import ClinicalTrials
 
@@ -53,8 +53,8 @@ corona_fields = ct.get_study_fields(
 
 # Read the csv data in Pandas
 ct_df = pd.DataFrame.from_records(corona_fields[1:], columns=corona_fields[0])
-print(ct_df)
+# print(ct_df)
 
-corona_fields2 = ct.get_study_fields("heart attack AND SEARCH[Location](AREA[LocationCity]Ottawa)", ["LocationFacility","LocationCity","BriefTitle"], max_studies=50, fmt='csv')
+corona_fields2 = ct.get_study_fields("COVID AND SEARCH[Location](AREA[LocationCity]Ottawa)", ["LocationFacility","LocationCity","BriefTitle"], max_studies=50, fmt='csv')
 ct_df = pd.DataFrame.from_records(corona_fields2)
 print(ct_df)

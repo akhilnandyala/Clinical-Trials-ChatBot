@@ -6,6 +6,7 @@ import joblib
 from pathlib import Path
 from PIL import Image
 import streamlit as st
+import user_info as u
 
 # paths
 # img_path = Path.joinpath(Path.cwd(), 'images')
@@ -33,7 +34,7 @@ def get_pred(model, encoded_input):
 def bot_precausion(df_input, pred):
     words = df_input.questions[0].split()
     if len([w for w in words if w in vocab]) == 0:
-        pred = 1
+        pred = 0
     return pred
 
 
@@ -58,6 +59,8 @@ def botResponse(user_input, ):
     pred = bot_precausion(df_input, pred)
 
     response = get_response(df2, pred)
+    if pred == 1:
+        u.user_info()
     response = bot_response(response)
 
     # if is_startup:
@@ -85,8 +88,9 @@ Bowhead Bot's main functionality is to help you find the info about the trials y
 # st.image(center, width=700)
 # st.sidebar.image(federer_image)
 # st.sidebar.image(nadal, width=350)
-
 user_input = get_text()
 response = botResponse(user_input)
 st.text_area("Bot:", value=response, height=200, max_chars=None, key=None)
+
+
 
