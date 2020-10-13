@@ -7,7 +7,6 @@ from pathlib import Path
 from PIL import Image
 import streamlit as st
 import user_info as u
-import geograpy
 
 # paths
 # img_path = Path.joinpath(Path.cwd(), 'images')
