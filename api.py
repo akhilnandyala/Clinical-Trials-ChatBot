@@ -28,4 +28,4 @@ def trial_details(user_condition, user_location):
     return ct_df.iloc[0]['NCTId']
 
 
-trial_details("diabetes",'Ottawa')
+# trial_details("diabetes",'Ottawa')

@@ -7,6 +7,8 @@ from pathlib import Path
 from PIL import Image
 import streamlit as st
 import api as api
+import re
+
 
 # paths
 # img_path = Path.joinpath(Path.cwd(), 'images')
@@ -57,17 +59,14 @@ def botResponse(user_input, user_name, user_location ):
 
     pred = get_pred(model, encoded_input)
     pred = bot_precausion(df_input, pred)
-
     if pred == 1:
         input_string = df_input.iloc[0]['questions']
         for i, r in condition_df.iterrows():
-            if r['med_condition'] in input_string:
+            if re.search(r['med_condition'], input_string, re.IGNORECASE):
                 user_condition = r['med_condition']
                 break
             else:
                 user_condition = 'none'
-                print(user_condition)
-                break
         trial_data = api.trial_details(user_condition, user_location)
         response = trial_data
     else:
