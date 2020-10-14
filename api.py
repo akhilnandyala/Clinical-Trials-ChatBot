@@ -24,7 +24,7 @@ def trial_details(user_condition, user_location):
     )
 
     ct_df = pd.DataFrame.from_records(corona_fields[1:], columns=corona_fields[0])
-    print(ct_df)
+    # print(ct_df)
     return ct_df.iloc[0]['NCTId']
 
 
