@@ -14,8 +14,6 @@ def trial_details(user_condition, user_location):
     ct = ClinicalTrials()
 
     # ct.get_full_studies(search_expr="Coronavirus+COVID", max_studies=50)
-    user_condition = 'COVID'
-    user_location = 'ottawa'
 
     search_query = '{} AND SEARCH[Location](AREA[LocationCity]{})'.format(user_condition, user_location)
     corona_fields = ct.get_study_fields(
@@ -30,4 +28,4 @@ def trial_details(user_condition, user_location):
     return ct_df.iloc[0]['NCTId']
 
 
-# trial_details("COVID",'Ottawa')
+trial_details("DIABETES",'Ottawa')

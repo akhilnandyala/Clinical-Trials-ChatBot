@@ -24,8 +24,7 @@ tokenizer_t = joblib.load(Path.joinpath(Path.cwd(), 'tokenizer_t.pkl'))
 vocab = joblib.load(Path.joinpath(Path.cwd(), 'vocab.pkl'))
 
 df2 = pd.read_csv(Path.joinpath(Path.cwd(), 'responses.csv'))
-condition_df = pd.read_csv(Path.joinpath(Path.cwd(),'medical_condition.csv'))
-user_condition = 'COVID'
+condition_df = pd.read_csv(Path.joinpath(Path.cwd(), 'medical_condition.csv'))
 
 def get_pred(model, encoded_input):
     pred = np.argmax(model.predict(encoded_input))
@@ -51,7 +50,6 @@ def bot_response(response, ):
 
 
 def botResponse(user_input, user_name, user_location ):
-    global user_condition
     df_input = user_input
 
     df_input = p.remove_stop_words_for_input(p.tokenizer, df_input, 'questions')
@@ -68,6 +66,8 @@ def botResponse(user_input, user_name, user_location ):
                 break
             else:
                 user_condition = 'none'
+                print(user_condition)
+                break
         trial_data = api.trial_details(user_condition, user_location)
         response = trial_data
     else:
@@ -88,10 +88,10 @@ st.title("""
 Bowhead Bot  
 Bowhead Bot's main functionality is to help you find the info about the trials you need
 """)
-st.write('Please enter you name')
-user_name = st.text_input('You', key=1)
-st.write('Please enter your location')
-user_location = st.text_input('You', key=2)
+st.sidebar.write('Please enter you name')
+user_name = st.sidebar.text_input('You', key=1)
+st.sidebar.write('Please enter your location')
+user_location = st.sidebar.text_input('You', key=2)
 
 # st.image(center, width=700)
 # st.sidebar.image(federer_image)
