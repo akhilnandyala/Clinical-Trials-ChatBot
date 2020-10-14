@@ -6,7 +6,7 @@ import joblib
 from pathlib import Path
 from PIL import Image
 import streamlit as st
-import user_info as u
+import api as api
 
 # paths
 # img_path = Path.joinpath(Path.cwd(), 'images')
@@ -24,6 +24,7 @@ tokenizer_t = joblib.load(Path.joinpath(Path.cwd(), 'tokenizer_t.pkl'))
 vocab = joblib.load(Path.joinpath(Path.cwd(), 'vocab.pkl'))
 
 df2 = pd.read_csv(Path.joinpath(Path.cwd(), 'responses.csv'))
+condition_df = pd.read_csv(Path.joinpath(Path.cwd(),'medical_condition.csv'))
 
 
 def get_pred(model, encoded_input):
@@ -49,7 +50,7 @@ def bot_response(response, ):
     return response
 
 
-def botResponse(user_input, ):
+def botResponse(user_input, user_name, user_location ):
     df_input = user_input
 
     df_input = p.remove_stop_words_for_input(p.tokenizer, df_input, 'questions')
@@ -58,8 +59,17 @@ def botResponse(user_input, ):
     pred = get_pred(model, encoded_input)
     pred = bot_precausion(df_input, pred)
 
-    response = get_response(df2, pred)
-    response = bot_response(response)
+    if pred == 1:
+        input_string = df_input.iloc[0]['questions']
+        for i, r in condition_df.iterrows():
+            if r['med_condition'] in input_string:
+                user_condition = r['med_condition']
+                break
+        trial_data = api.trial_details(user_condition, user_location)
+        response = trial_data
+    else:
+        response = get_response(df2, pred)
+        response = bot_response(response)
 
     return response
 
@@ -84,9 +94,8 @@ user_location = st.text_input('You', key=2)
 # st.sidebar.image(federer_image)
 # st.sidebar.image(nadal, width=350)
 user_input = get_text()
-response = botResponse(user_input)
-default_string = 'Hi {}, how can I help you ?'.format(user_name)
-st.text_area("Bot:", default_string, value=response, height=200, max_chars=None, key=None)
+response = botResponse(user_input, user_name, user_location)
+st.text_area("Bot:", value=response, height=200, max_chars=None, key=None)
 
 
 
