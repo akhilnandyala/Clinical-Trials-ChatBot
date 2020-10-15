@@ -62,8 +62,8 @@ def botResponse(user_input, user_name, user_location ):
     a = df_input.iloc[0]['questions']
     if pred == 0:
         if not a:
-            response = st.write('Hi, I am Bowhead Bot, I can help you get to know more about Bowhead Health and the services we provide. I can also help you'
-                                'find information about medical trials')
+            response = st.write('Hi {}, I am Bowhead Bot, I can help you get to know more about Bowhead Health and the services we provide. I can also help you'
+                                'find information about medical trials').format(user_name)
         else:
             response = get_response(df2, pred)
             response = bot_response(response)
@@ -94,12 +94,15 @@ def get_text():
 st.sidebar.title("Bowhead Bot")
 st.title("""
 Bowhead Bot  
-Bowhead Bot's main functionality is to help you find the info about the trials you need
+Bowhead Bot's main functionality is to help you find the information about medical trials
 """)
 st.sidebar.write('Please enter you name')
 user_name = st.sidebar.text_input('You', key=1)
-st.sidebar.write('Please enter your location')
+st.sidebar.write('Please enter your city')
 user_location = st.sidebar.text_input('You', key=2)
+
+if not user_name or not user_location:
+    st.sidebar.write('Please enter name and location before proceeding')
 
 # st.image(center, width=700)
 # st.sidebar.image(federer_image)
