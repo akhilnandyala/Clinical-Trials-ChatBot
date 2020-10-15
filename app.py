@@ -97,7 +97,7 @@ user_location = st.sidebar.text_input('You', key=2)
 # st.sidebar.image(nadal, width=350)
 user_input = get_text()
 response = botResponse(user_input, user_name, user_location)
-st.text_area("Bot:", value=response, height=200, max_chars=None, key=None)
+st.text_area("Bot:", value=response, height=200, max_chars=None, key=None, )
 
 
 
