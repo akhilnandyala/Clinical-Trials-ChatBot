@@ -30,7 +30,7 @@
           "context": [""]
         },
         { "tag": "covid_trials",
-          "patterns": ["What can you tell me about covid trials", "I need some info about covid trials", "Covid trials info needed", "I want to know about covid trials", "Show me covid trials info"],
+          "patterns": ["What can you tell me about covid trials", "I need some information about covid trials", "Covid trials information needed", "I want to know about covid trials", "Show me covid trials info", "I want to find hepatitis trails", " heart trials", "find trials details", " trials info"],
           "responses": ["Sure let me get that info for you", "I will get that info for you", "Getting the covid trails info", "Gathering the trials information "],
           "context": [""]
         }

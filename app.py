@@ -51,7 +51,7 @@ def bot_response(response, ):
     return response
 
 
-def botResponse(user_input, user_name, user_location ):
+def botResponse(user_input, user_name, user_location, user_age, user_gender='All'):
     df_input = user_input
 
     df_input = p.remove_stop_words_for_input(p.tokenizer, df_input, 'questions')
@@ -75,7 +75,7 @@ def botResponse(user_input, user_name, user_location ):
                 break
             else:
                 user_condition = 'none'
-        trial_data = api.trial_details(user_condition, user_location)
+        trial_data = api.trial_details(user_condition, user_location, user_age, user_gender)
         response = trial_data
         st.write(response, unsafe_allow_html=True)
         response = ''
@@ -87,7 +87,7 @@ def botResponse(user_input, user_name, user_location ):
 
 
 def get_text():
-    input_text = st.text_input("You: ", key=3)
+    input_text = st.text_input("You: ", key=5)
     df_input = pd.DataFrame([input_text], columns=['questions'])
     return df_input
 
@@ -101,14 +101,19 @@ st.sidebar.write('Please enter you name')
 user_name = st.sidebar.text_input('You', key=1)
 st.sidebar.write('Please enter your city')
 user_location = st.sidebar.text_input('You', key=2)
+st.sidebar.write('Please enter your age in years')
+user_age = st.sidebar.text_input('You', key=3)
+user_age = user_age + ' ' + 'years'
+st.sidebar.write('Please enter your gender')
+user_gender = st.sidebar.text_input('You', key=4)
 
 # st.image(center, width=700)
 # st.sidebar.image(federer_image)
 # st.sidebar.image(nadal, width=350)
 user_input = get_text()
-response = botResponse(user_input, user_name, user_location)
+response = botResponse(user_input, user_name, user_location, user_age, user_gender)
 
-if not user_name or not user_location:
+if not user_name or not user_location or not user_age:
     response = 'Hello user, Please enter your name and location on the left panel before proceeding'
 
 if response:

@@ -1,0 +1,63 @@
+<style>
+.TrialsTable thead {
+    display: none;
+}
+
+.TrialsTable tr {
+    display: block;
+    margin-bottom: 1.5rem;
+    padding: 1rem 0.5rem 0.5rem 1rem;
+    background-color: transparentize( white, 0.15 );
+    box-shadow: 0 0 1rem transparentize( black, 0.9 );
+}
+
+.TrialsTable td {
+    display: inline-block;
+    margin: 0 0.5rem 0.5rem 0;
+    padding: 0.5rem;
+    text-align: left;
+    background-color: white;
+    border: 1px solid transparentize( #58C25F, 0.5 );
+}
+
+.TrialsTable td:before {
+    float: left;
+    margin: -0.5rem 0.5rem -0.5rem -0.5rem;
+    padding: 0.625rem 0.5rem 0.625rem;
+    font-size: 0.75em;
+    font-weight: bold;
+    background: transparentize( #58C25F, 0.9 );
+    color: #58C25F;
+}
+
+.TrialsTable td:nth-child(2):before {
+    content: "Column 2 Label: ";
+}
+</style><table border="1" class="TrialsTable">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Rank</th>
+      <th>Gender</th>
+      <th>MaximumAge</th>
+      <th>MinimumAge</th>
+      <th>StdAge</th>
+      <th>NCTId</th>
+      <th>Condition</th>
+      <th>BriefTitle</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>All</td>
+      <td>100 Years</td>
+      <td>18 Years</td>
+      <td>Adult|Older Adult</td>
+      <td><a target="_blank" href="https://clinicaltrials.gov/show/NCT04570189">NCT04570189</a></td>
+      <td>COVID-19</td>
+      <td>Evaluating Auscul-X, a Touch Free Digital Stethoscope</td>
+    </tr>
+  </tbody>
+</table>
