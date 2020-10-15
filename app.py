@@ -63,6 +63,9 @@ def botResponse(user_input, user_name, user_location ):
     if pred == 0:
         if a.empty:
             response = st.write('')
+        else:
+            response = get_response(df2, pred)
+            response = bot_response(response)
     elif pred == 1:
         input_string = df_input.iloc[0]['questions']
         for i, r in condition_df.iterrows():
