@@ -59,7 +59,10 @@ def botResponse(user_input, user_name, user_location ):
 
     pred = get_pred(model, encoded_input)
     pred = bot_precausion(df_input, pred)
-    if pred == 1:
+
+    if pred == 0 and df_input['questions'] == '':
+        response = st.write('')
+    elif pred == 1:
         input_string = df_input.iloc[0]['questions']
         for i, r in condition_df.iterrows():
             if re.search(r['med_condition'], input_string, re.IGNORECASE):
@@ -78,7 +81,7 @@ def botResponse(user_input, user_name, user_location ):
 
 
 def get_text():
-    input_text = st.text_input("You: ", "type here")
+    input_text = st.text_input("You: ", key=3)
     df_input = pd.DataFrame([input_text], columns=['questions'])
     return df_input
 
