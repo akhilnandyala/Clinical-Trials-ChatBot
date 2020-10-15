@@ -108,7 +108,7 @@ user_input = get_text()
 response = botResponse(user_input, user_name, user_location)
 
 if not user_name or not user_location:
-    response = 'Hello user, Please enter your name and location before proceeding'
+    response = 'Hello user, Please enter your name and location on the left panel before proceeding'
 
 st.text_area("Bot:", value=response, height=200, max_chars=None, key=None, )
 
