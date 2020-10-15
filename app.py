@@ -77,7 +77,6 @@ def botResponse(user_input, user_name, user_location ):
                 user_condition = 'none'
         trial_data = api.trial_details(user_condition, user_location)
         response = trial_data
-        response = st.write(response, unsafe_allow_html=True)
     else:
         response = get_response(df2, pred)
         response = bot_response(response)
@@ -110,7 +109,7 @@ response = botResponse(user_input, user_name, user_location)
 if not user_name or not user_location:
     response = 'Hello user, Please enter your name and location on the left panel before proceeding'
 
-st.text_area("Bot:", value=response, height=200, max_chars=None, key=None, )
+st.text_area("Bot:", value=response, height=200, max_chars=None, key=None, unsafe_allow_html=True)
 
 
 
