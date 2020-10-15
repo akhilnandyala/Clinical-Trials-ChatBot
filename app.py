@@ -69,6 +69,7 @@ def botResponse(user_input, user_name, user_location ):
                 user_condition = 'none'
         trial_data = api.trial_details(user_condition, user_location)
         response = trial_data
+        response = st.write(response, unsafe_allow_html=True)
     else:
         response = get_response(df2, pred)
         response = bot_response(response)
