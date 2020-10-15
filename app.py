@@ -62,8 +62,8 @@ def botResponse(user_input, user_name, user_location ):
     a = df_input.iloc[0]['questions']
     if pred == 0:
         if not a:
-            response = st.write('Hi {}, I am Bowhead Bot, I can help you get to know more about Bowhead Health and the services we provide. I can also help you'
-                                'find information about medical trials').format(user_name)
+            default_response = 'Hi {}, I am Bowhead Bot, I can help you get to know more about Bowhead Health and the services we provide. I can also help you find information about medical trials'.format(user_name)
+            response = st.write(default_response)
         else:
             response = get_response(df2, pred)
             response = bot_response(response)
