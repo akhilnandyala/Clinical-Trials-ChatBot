@@ -1,6 +1,7 @@
 import json
 import requests
 import pandas as pd
+import codecs
 from pytrials.client import ClinicalTrials
 
 pd.set_option('display.max_rows', None)
@@ -32,33 +33,10 @@ def trial_details(user_condition, user_location, user_age, user_gender):
 
     ct_df['NCTId'] = ct_df['NCTId'].apply(make_clickable)
 
-    ct_df.to_html('trials.html',escape=False)
+    ct_df = ct_df.to_html(escape=False)
 
-    import codecs
-    ct_df = codecs.open("trials.html", 'r')
-    ct_df_style = codecs.open("trialsCSS.css", 'r')
-
-    print(ct_df.read())
-    ApplyGenericCSS('trials.html','trialsCSS.css')
-    print(ct_df.read())
-    ct_df = pd.read_html('trials.html')
+    # print(ct_df)
     return ct_df
 
-def ApplyGenericCSS (InputFile, CSSFile):
-    with open(CSSFile,'r') as f:
-        newlines = []
-        for line in f.readlines():
-            newlines.append(line)
-    f.close()
-
-    with open(InputFile,'r') as f:
-        for line in f.readlines():
-            newlines.append(line.replace('class="dataframe"','class="TrialsTable"'))
-    f.close()
-    with open(InputFile, 'w') as f:
-        for line in newlines:
-            f.write(line)
-
-
-trial_details("covid",'Ottawa', '20 years', "Male")
+# trial_details("covid",'Ottawa', '20 years', "Male")
 
