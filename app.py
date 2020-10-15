@@ -101,14 +101,15 @@ user_name = st.sidebar.text_input('You', key=1)
 st.sidebar.write('Please enter your city')
 user_location = st.sidebar.text_input('You', key=2)
 
-if not user_name or not user_location:
-    st.sidebar.write('Please enter name and location before proceeding')
-
 # st.image(center, width=700)
 # st.sidebar.image(federer_image)
 # st.sidebar.image(nadal, width=350)
 user_input = get_text()
 response = botResponse(user_input, user_name, user_location)
+
+if not user_name or not user_location:
+    response = 'Hello user, Please enter your name and location before proceeding'
+
 st.text_area("Bot:", value=response, height=200, max_chars=None, key=None, )
 
 
