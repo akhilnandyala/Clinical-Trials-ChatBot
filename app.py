@@ -59,9 +59,9 @@ def botResponse(user_input, user_name, user_location ):
 
     pred = get_pred(model, encoded_input)
     pred = bot_precausion(df_input, pred)
-    a = df_input['questions']
+    a = df_input.iloc[0]['questions']
     if pred == 0:
-        if a.empty:
+        if not a:
             response = st.write('')
         else:
             response = get_response(df2, pred)
