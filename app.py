@@ -122,7 +122,7 @@ def get_text():
             text = r.recognize_google(voice_data, language='en')
             print(text)
 
-    st.write(text)
+        st.write(text)
     df_input = pd.DataFrame([input_text], columns=['questions'])
     return df_input
 
