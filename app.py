@@ -28,6 +28,8 @@ vocab = joblib.load(Path.joinpath(Path.cwd(), 'vocab.pkl'))
 df2 = pd.read_csv(Path.joinpath(Path.cwd(), 'responses.csv'))
 condition_df = pd.read_csv(Path.joinpath(Path.cwd(), 'medical_condition.csv'))
 
+original_input_text = ''
+
 def get_pred(model, encoded_input):
     pred = np.argmax(model.predict(encoded_input))
     return pred
@@ -72,19 +74,30 @@ def botResponse(user_input, user_name, user_location, user_age, user_gender='All
         for i, r in condition_df.iterrows():
             med_condition_word_list = r['med_condition'].split()
             med_condition_word_combo_list = list(map(' '.join, zip(med_condition_word_list[:-1], med_condition_word_list[1:])))
-            med_condition_word_list_final = med_condition_word_combo_list + med_condition_word_list
-            med_condition_word_list_final.sort(key=lambda x: len(x.split()), reverse=True)
-            # print(med_condition_word_list_final)
-            if re.search(r['med_condition'], input_string, re.IGNORECASE) or any(x in input_string.upper() for x in med_condition_word_list_final):
+            print(original_input_text)
+            print(med_condition_word_combo_list)
+            if re.search(r['med_condition'], original_input_text, re.IGNORECASE) or any(x in original_input_text.upper() for x in med_condition_word_combo_list):
                 user_condition = r['med_condition']
-                # print('found word match')
                 break
             else:
                 user_condition = 'none'
-                # print('word not matched')
+
+        if user_condition == 'none':
+            for i, r in condition_df.iterrows():
+                med_condition_word_list = r['med_condition'].split()
+                print(original_input_text)
+                print(med_condition_word_list)
+                if re.search(r['med_condition'], original_input_text, re.IGNORECASE) or any(x in original_input_text.upper() for x in med_condition_word_list):
+                    user_condition = r['med_condition']
+                    break
+                else:
+                    user_condition = 'none'
+
         trial_data = api.trial_details(user_condition, user_location, user_age, user_gender)
         response = trial_data
+        # writing the reponse to a seperate streamlit write to use the parameter 'unsafe_allow_html' to display the html output
         st.write(response, unsafe_allow_html=True)
+        # To hide the actual Bot response 'st.text_area' and displaying the trials html data separately using above command
         response = ''
     else:
         response = get_response(df2, pred)
@@ -95,7 +108,9 @@ def botResponse(user_input, user_name, user_location, user_age, user_gender='All
 
 def get_text():
     input_text = st.text_input("You: ", key=5)
-    # input_text = 'I want to find trials for hepatitis C'
+    input_text = 'I want to find trials for hepatitis B'
+    global original_input_text
+    original_input_text = input_text
     df_input = pd.DataFrame([input_text], columns=['questions'])
     return df_input
 
