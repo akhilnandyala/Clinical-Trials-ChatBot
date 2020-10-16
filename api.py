@@ -23,7 +23,7 @@ def trial_details(user_condition, user_location, user_age, user_gender):
     search_query = '{} AND (SEARCH[Location](AREA[LocationCity]{}) AND AREA[MinimumAge]RANGE[MIN,{}] AND AREA[MaximumAge]RANGE[{},MAX] AND (AREA[Gender]All OR  AREA[Gender]{}))'.format(user_condition, user_location, user_age, user_age, user_gender)
     corona_fields = ct.get_study_fields(
         search_expr=search_query,
-        fields=["Gender", "MaximumAge", "MinimumAge", "NCTId", "Condition", "BriefTitle"],
+        fields=["Gender", "MinimumAge", "MaximumAge", "NCTId", "Condition", "BriefTitle"],
         max_studies=50,
         fmt="csv",
     )
