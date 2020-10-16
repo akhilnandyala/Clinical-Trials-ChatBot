@@ -111,6 +111,18 @@ def get_text():
     # input_text = 'I want to find trials for hepatitis B'
     global original_input_text
     original_input_text = input_text
+
+    if st.button('Voice recognition On'):
+        import speech_recognition as sr
+        r = sr.Recognizer()
+
+        with sr.Microphone() as source:
+            r.adjust_for_ambient_noise(source)
+            voice_data = r.record(source, duration=10)
+            text = r.recognize_google(voice_data, language='en')
+            print(text)
+
+    st.write(text)
     df_input = pd.DataFrame([input_text], columns=['questions'])
     return df_input
 
