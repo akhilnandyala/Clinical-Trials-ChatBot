@@ -1,11 +1,11 @@
-pandas==1.0.5
-streamlit==0.67.1
 numpy==1.17.0
+streamlit==0.67.1
 joblib==0.16.0
-pytrials==0.1.2
-tensorflow==1.14.0
-nltk==3.5
 matplotlib==3.2.2
+nltk==3.5
+pandas==1.0.5
+pytrials==0.1.2
+SpeechRecognition==3.8.1
+tensorflow==1.14.0
 requests==2.24.0
 Pillow==8.0.0
-lxml==4.5.2
