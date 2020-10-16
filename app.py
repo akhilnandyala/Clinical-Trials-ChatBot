@@ -108,7 +108,7 @@ def botResponse(user_input, user_name, user_location, user_age, user_gender='All
 
 def get_text():
     input_text = st.text_input("You: ", key=5)
-    input_text = 'I want to find trials for hepatitis B'
+    # input_text = 'I want to find trials for hepatitis B'
     global original_input_text
     original_input_text = input_text
     df_input = pd.DataFrame([input_text], columns=['questions'])
