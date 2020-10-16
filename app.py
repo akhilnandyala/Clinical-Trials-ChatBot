@@ -123,7 +123,15 @@ def get_text():
             text = r.recognize_google(audio)
 
         st.write(text)
-    df_input = pd.DataFrame([input_text], columns=['questions'])
+
+        from gtts import gTTS
+        import os
+        language = 'en'
+        speech = gTTS(text=text, lang=language, slow=False)
+        speech.save("text.mp3")
+        os.system("start text.mp3")
+
+        df_input = pd.DataFrame([input_text], columns=['questions'])
     return df_input
 
 
