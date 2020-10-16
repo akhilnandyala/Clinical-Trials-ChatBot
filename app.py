@@ -73,6 +73,7 @@ def botResponse(user_input, user_name, user_location, user_age, user_gender='All
             med_condition_word_list = r['med_condition'].split()
             med_condition_word_combo_list = list(map(' '.join, zip(med_condition_word_list[:-1], med_condition_word_list[1:])))
             med_condition_word_list_final = med_condition_word_combo_list + med_condition_word_list
+            med_condition_word_list_final.sort(key=lambda x: len(x.split()), reverse=True)
             # print(med_condition_word_list_final)
             if re.search(r['med_condition'], input_string, re.IGNORECASE) or any(x in input_string.upper() for x in med_condition_word_list_final):
                 user_condition = r['med_condition']

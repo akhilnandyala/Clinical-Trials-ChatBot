@@ -33,10 +33,10 @@ def trial_details(user_condition, user_location, user_age, user_gender):
 
     ct_df['NCTId'] = ct_df['NCTId'].apply(make_clickable)
 
-    ct_df = ct_df.to_html(escape=False)
+    ct_df = ct_df.to_html(escape=False,border=0)
 
     print(ct_df)
     return ct_df
 
-trial_details("hepatitis",'Ottawa', '30 years', "Male")
+trial_details("hepatitis B",'Ottawa', '30 years', "Male")
 
