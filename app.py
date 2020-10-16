@@ -113,25 +113,15 @@ def get_text():
     original_input_text = input_text
 
     if st.button('Voice recognition On'):
-        import speech_recognition as sr
-
-        r = sr.Recognizer()
-        mic = sr.Microphone()
-
-        with mic as source:
-            audio = r.listen(source)
-            text = r.recognize_google(audio)
-
-        st.write(text)
 
         from gtts import gTTS
         import os
         language = 'en'
-        speech = gTTS(text=text, lang=language, slow=False)
+        speech = gTTS(text=response, lang=language, slow=False)
         speech.save("text.mp3")
         os.system("start text.mp3")
 
-        df_input = pd.DataFrame([input_text], columns=['questions'])
+    df_input = pd.DataFrame([input_text], columns=['questions'])
     return df_input
 
 
