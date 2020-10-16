@@ -1,5 +1,4 @@
 SpeechRecognition==3.8.1
-PyAudio==0.2.11
 numpy==1.19.1
 streamlit==0.67.1
 tensorflow==1.14.0
