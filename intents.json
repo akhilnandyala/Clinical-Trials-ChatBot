@@ -26,12 +26,12 @@
         },
         { "tag": "options",
           "patterns": ["How can you help me?", "What can you do?", "What help you provide?", "How can you be helpful?", "What support do you offered","What do you know?","what help?","What are you about?"],
-          "responses": ["I can help you get to know more about Bowhead Health and the services we provide, in particular, I can help you find Covid trails suitable to your needs"],
+          "responses": ["I can help you get to know more about Bowhead Health and the services we provide, in particular, I can help you find Covid trials suitable to your needs"],
           "context": [""]
         },
         { "tag": "covid_trials",
-          "patterns": ["What can you tell me about covid trials", "I need some information about covid trials", "Covid trials information needed", "I want to know about covid trials", "Show me covid trials info", "I want to find hepatitis trails", " heart trials", "find trials details", " trials info"],
-          "responses": ["Sure let me get that info for you", "I will get that info for you", "Getting the covid trails info", "Gathering the trials information "],
+          "patterns": ["What can you tell me about covid trials", "I need some information about covid trials", "Covid trials information needed", "I want to know about covid trials", "Show me covid trials info", "I want to find hepatitis trials", "find heart trials details", "find medical trials info", "Diabetes trials"],
+          "responses": ["Sure let me get that info for you", "I will get that info for you", "Getting the covid trials info", "Gathering the trials information "],
           "context": [""]
         }
    ]
