@@ -35,8 +35,8 @@ def trial_details(user_condition, user_location, user_age, user_gender):
 
     ct_df = ct_df.to_html(escape=False)
 
-    # print(ct_df)
+    print(ct_df)
     return ct_df
 
-# trial_details("covid",'Ottawa', '20 years', "Male")
+trial_details("hepatitis",'Ottawa', '30 years', "Male")
 

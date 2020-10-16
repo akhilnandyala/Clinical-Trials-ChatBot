@@ -70,11 +70,15 @@ def botResponse(user_input, user_name, user_location, user_age, user_gender='All
     elif pred == 1:
         input_string = df_input.iloc[0]['questions']
         for i, r in condition_df.iterrows():
-            if re.search(r['med_condition'], input_string, re.IGNORECASE):
+            med_condition_word_list = r['med_condition'].split()
+            # print(med_condition_word_list)
+            if re.search(r['med_condition'], input_string, re.IGNORECASE) or any(x in input_string.upper() for x in med_condition_word_list):
                 user_condition = r['med_condition']
+                # print('found word match')
                 break
             else:
                 user_condition = 'none'
+                # print('word not matched')
         trial_data = api.trial_details(user_condition, user_location, user_age, user_gender)
         response = trial_data
         st.write(response, unsafe_allow_html=True)
@@ -88,6 +92,7 @@ def botResponse(user_input, user_name, user_location, user_age, user_gender='All
 
 def get_text():
     input_text = st.text_input("You: ", key=5)
+    # input_text = 'I want to find trials for hepatitis'
     df_input = pd.DataFrame([input_text], columns=['questions'])
     return df_input
 
