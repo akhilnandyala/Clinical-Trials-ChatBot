@@ -112,17 +112,17 @@ def get_text():
     global original_input_text
     original_input_text = input_text
 
-    # if st.button('Voice recognition On'):
-    #     import speech_recognition as sr
-    #     r = sr.Recognizer()
-    #
-    #     with sr.Microphone() as source:
-    #         r.adjust_for_ambient_noise(source)
-    #         voice_data = r.record(source, duration=10)
-    #         text = r.recognize_google(voice_data, language='en')
-    #         print(text)
-    #
-    #     st.write(text)
+    if st.button('Voice recognition On'):
+        import speech_recognition as sr
+
+        r = sr.Recognizer()
+        mic = sr.Microphone()
+
+        with mic as source:
+            audio = r.listen(source)
+            text = r.recognize_google(audio)
+
+        st.write(text)
     df_input = pd.DataFrame([input_text], columns=['questions'])
     return df_input
 
