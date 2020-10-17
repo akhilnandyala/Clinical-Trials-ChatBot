@@ -125,7 +125,7 @@ user_name = st.sidebar.text_input('You', key=1)
 # st.sidebar.write('Please enter your city')
 # user_location = st.sidebar.text_input('You', key=2)
 user_location = st.sidebar.selectbox('Please select you city', world_cities_df)
-user_age = st.sidebar.slider('Please select you age', 0.0, 100.0, 50.0, 1)
+user_age = st.sidebar.slider('Please select you age', 0, 100, 50, 1)
 user_age = str(user_age) + ' ' + 'years'
 user_gender = st.sidebar.radio('Please select your gender', ('Male', 'Female', 'Other'))
 
