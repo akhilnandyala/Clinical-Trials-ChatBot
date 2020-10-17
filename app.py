@@ -111,16 +111,6 @@ def get_text():
     # input_text = 'I want to find trials for hepatitis B'
     global original_input_text
     original_input_text = input_text
-
-    if st.button('Voice recognition On'):
-
-        from gtts import gTTS
-        import os
-        language = 'en'
-        speech = gTTS(text=response, lang=language, slow=False)
-        speech.save("text.mp3")
-        os.system("start text.mp3")
-
     df_input = pd.DataFrame([input_text], columns=['questions'])
     return df_input
 
@@ -138,7 +128,9 @@ st.sidebar.write('Please enter your age in years')
 user_age = st.sidebar.text_input('You', key=3)
 user_age = user_age + ' ' + 'years'
 st.sidebar.write('Please enter your gender')
-user_gender = st.sidebar.text_input('You', key=4)
+user_gender = st.radio('Please select your gender', ('Male', 'Female', 'Other'))
+# user_gender = st.sidebar.text_input('You', key=4)
+st.write(user_gender)
 
 # st.image(center, width=700)
 # st.sidebar.image(federer_image)
