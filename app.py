@@ -27,6 +27,7 @@ vocab = joblib.load(Path.joinpath(Path.cwd(), 'vocab.pkl'))
 
 df2 = pd.read_csv(Path.joinpath(Path.cwd(), 'responses.csv'))
 condition_df = pd.read_csv(Path.joinpath(Path.cwd(), 'medical_condition.csv'))
+world_cities_df = pd.read_csv(Path.joinpath(Path.cwd(), 'world-cities_csv.csv'))
 
 original_input_text = ''
 
@@ -107,8 +108,7 @@ def botResponse(user_input, user_name, user_location, user_age, user_gender='All
 
 
 def get_text():
-    input_text = st.text_input("You: ", key=5)
-    # input_text = 'I want to find trials for hepatitis B'
+    input_text = st.text_input("You: ", key=3)
     global original_input_text
     original_input_text = input_text
     df_input = pd.DataFrame([input_text], columns=['questions'])
@@ -122,18 +122,12 @@ Bowhead Bot's main functionality is to help you find the information about medic
 """)
 st.sidebar.write('Please enter you name')
 user_name = st.sidebar.text_input('You', key=1)
-st.sidebar.write('Please enter your city')
-user_location = st.sidebar.text_input('You', key=2)
-# st.sidebar.write('Please enter your age in years')
-# user_age = st.sidebar.text_input('You', key=3)
-# user_age = user_age + ' ' + 'years'
-user_age = st.sidebar.slider('Please select you age', 0.0, 100.0, 50.0)
+# st.sidebar.write('Please enter your city')
+# user_location = st.sidebar.text_input('You', key=2)
+user_location = st.sidebar.selectbox('Please select you city', world_cities_df)
+user_age = st.sidebar.slider('Please select you age', 0.0, 100.0, 50.0, 1)
 user_age = str(user_age) + ' ' + 'years'
-st.sidebar.write('user age:', user_age)
-st.sidebar.write('Please enter your gender')
 user_gender = st.sidebar.radio('Please select your gender', ('Male', 'Female', 'Other'))
-# user_gender = st.sidebar.text_input('You', key=4)
-st.sidebar.write(user_gender)
 
 # st.image(center, width=700)
 # st.sidebar.image(federer_image)
