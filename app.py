@@ -127,8 +127,8 @@ user_location = st.sidebar.text_input('You', key=2)
 # st.sidebar.write('Please enter your age in years')
 # user_age = st.sidebar.text_input('You', key=3)
 # user_age = user_age + ' ' + 'years'
-user_age = st.sidebar.slider('Please select you age', 0.0, 100.0, (25.0, 75.0))
-user_age = user_age + ' ' + 'years'
+user_age = st.sidebar.slider('Please select you age', 0.0, 100.0, 50.0)
+user_age = str(user_age) + ' ' + 'years'
 st.sidebar.write('user age:', user_age)
 st.sidebar.write('Please enter your gender')
 user_gender = st.sidebar.radio('Please select your gender', ('Male', 'Female', 'Other'))
