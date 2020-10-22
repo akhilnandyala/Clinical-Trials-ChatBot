@@ -125,9 +125,18 @@ user_name = st.sidebar.text_input('You', key=1)
 # st.sidebar.write('Please enter your city')
 # user_location = st.sidebar.text_input('You', key=2)
 user_location = st.sidebar.selectbox('Please select you city', world_cities_df)
+user_location = str(user_location)
 user_age = st.sidebar.slider('Please select you age', 0, 100, 50, 1)
 user_age = str(user_age) + ' ' + 'years'
 user_gender = st.sidebar.radio('Please select your gender', ('Male', 'Female', 'Other'))
+
+if st.button('Voice'):
+    import speech_recognition as sr
+    r = sr.Recognizer()
+    mic = sr.Microphone()
+    with mic as source:
+        audio = r.listen(source)
+        r.recognize_google(audio)
 
 # st.image(center, width=700)
 # st.sidebar.image(federer_image)
