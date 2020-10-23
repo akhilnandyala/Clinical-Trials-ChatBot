@@ -9,9 +9,11 @@ import streamlit as st
 import api as api
 import re
 import speech_recognition as sr
-from gtts import gTTS
-import os
-from playsound import playsound
+
+#include these packages when using audio
+# from gtts import gTTS
+# import os
+# from playsound import playsound
 
 
 # paths
@@ -157,7 +159,7 @@ if user_name and user_location and user_age:
     response = botResponse(user_input, user_name, user_location, user_age, user_gender)
 
 if not user_name or not user_location or not user_age:
-    response = 'Hello user, Please fill the details on the left panel before proceeding'
+    response = 'Hello user, Please fill the details on the left panel before proceeding.'
 
 if response:
     st.text_area("Bot:", value=response, height=200, max_chars=None, key=None)
