@@ -1,5 +1,4 @@
 from flask import Flask, render_template, render_template_string, request, session
-from flask_session import Session
 import numpy as np
 import pandas as pd
 import preprocessor as p
@@ -8,6 +7,7 @@ import joblib
 from pathlib import Path
 import re
 import api as api
+import secrets
 
 
 # load artifacts
@@ -96,9 +96,8 @@ def get_text(user_input):
 
 
 app = Flask(__name__)
-SESSION_TYPE = 'filesystem'
-app.config.from_object(__name__)
-Session(app)
+secret = secrets.token_urlsafe(32)
+app.secret_key = secret
 
 def get_user_details():
     if session.get('user_name_check') == 0:
