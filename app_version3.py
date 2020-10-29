@@ -190,7 +190,7 @@ def process():
             default_response = 'Hi {}, I am Bowhead Bot, I can help you get to know more about Bowhead Health and the services we provide. Also I can help you find information about medical trials.'.format(session.get('user_name'))
             session['all_checked_check'] = 2
             return render_template('index.html', bot_response=default_response)
-
+        print(session.get('user_name_check'),session.get('user_location_check'),session.get('user_age_check'),session.get('user_gender_check'),session.get('all_checked_check'))
         user_name = session.get('user_name')
         user_location = session.get('user_location')
         user_age = session.get('user_age')
@@ -203,6 +203,7 @@ def process():
         bot_pred = bot_response_pred['pred']
         return render_template('index.html', user_input=user_input, bot_response=bot_response)
     else:
+        print(session.get('user_name_check'),session.get('user_location_check'),session.get('user_age_check'),session.get('user_gender_check'),session.get('all_checked_check'))
         return render_template('index.html', bot_response='Please enter correct values to user details')
 
 
