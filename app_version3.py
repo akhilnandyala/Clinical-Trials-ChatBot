@@ -18,16 +18,16 @@ condition_df = pd.read_csv(Path.joinpath(Path.cwd(), 'medical_condition.csv'))
 world_cities_df = pd.read_csv(Path.joinpath(Path.cwd(), 'world-cities_csv.csv'))
 
 original_input_text = ''
-voice_input_check = 0
-user_name = ''
-user_location = ''
-user_age = 0
-user_gender = ''
-user_name_check = 0
-user_location_check = 0
-user_age_check = 0
-user_gender_check = 0
-all_checked_check = 0
+# voice_input_check = 0
+# user_name = ''
+# user_location = ''
+# user_age = 0
+# user_gender = ''
+# user_name_check = 0
+# user_location_check = 0
+# user_age_check = 0
+# user_gender_check = 0
+# all_checked_check = 0
 
 def get_pred(encoded_input):
     model = load_model(Path.joinpath(Path.cwd(), 'model-v1.h5'))
