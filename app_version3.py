@@ -116,7 +116,16 @@ def get_user_details():
         bot_response = 'Please enter your gender'
         return render_template('index.html', user_input=user_age, bot_response=bot_response)
 
+def flush_all_checks():
+    global user_name_check, user_location_check, user_age_check, user_gender_check, all_checked_check
+    user_name_check = 0
+    user_location_check = 0
+    user_age_check = 0
+    user_gender_check = 0
+    all_checked_check = 0
+
 app = Flask(__name__)
+app.config["CACHE_TYPE"] = "null"
 
 @app.route('/')
 def index():
@@ -125,6 +134,7 @@ def index():
 @app.route('/initialize', methods=['POST'])
 def initialize():
     if request.form['initialize_bot'] == 'Initialize':
+        flush_all_checks()
         x = get_user_details()
         return x
     else:
@@ -185,4 +195,4 @@ def process():
 
 
 if __name__ == '__main__':
-    app.run(threaded=True, port=5002)
+    app.run(port=5002)
