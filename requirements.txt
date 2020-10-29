@@ -12,3 +12,4 @@ tensorflow==1.14.0
 Flask==1.1.2
 playsound==1.2.2
 Pillow==8.0.1
+gunicorn==20.0.4
