@@ -150,7 +150,6 @@ def initialize():
 
 @app.route('/process', methods=['POST'])
 def process():
-
     if session.get('user_name_check') == 0:
         session['user_name'] = request.form['user_input']
         if session.get('user_name').isalpha():
