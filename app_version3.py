@@ -1,4 +1,5 @@
-from flask import Flask, render_template, render_template_string, request
+from flask import Flask, render_template, render_template_string, request, session
+from flask_session import Session
 import numpy as np
 import pandas as pd
 import preprocessor as p
@@ -93,43 +94,56 @@ def get_text(user_input):
     df_input = pd.DataFrame([user_input], columns=['questions'])
     return df_input
 
-def get_user_details():
-    if user_name_check == 0:
-        bot_response = 'Please enter your name'
-        return render_template('index.html', bot_response=bot_response)
-    if user_location_check == 0:
-        bot_response = 'Please enter your location'
-        return render_template('index.html',user_input=user_name, bot_response=bot_response)
-    if user_age_check == 0:
-        bot_response = 'Please enter your age'
-        return render_template('index.html',user_input=user_location, bot_response=bot_response)
-    if user_gender_check == 0:
-        bot_response = 'Please enter your gender'
-        return render_template('index.html', user_input=user_age, bot_response=bot_response)
-
-def flush_all_checks():
-    global user_name, user_location, user_age, user_gender, user_name_check, user_location_check, user_age_check, user_gender_check, all_checked_check
-    user_name = ''
-    user_location = ''
-    user_age = 0
-    user_gender = ''
-    user_name_check = 0
-    user_location_check = 0
-    user_age_check = 0
-    user_gender_check = 0
-    all_checked_check = 0
 
 app = Flask(__name__)
-app.config["CACHE_TYPE"] = "null"
+SESSION_TYPE = 'filesystem'
+app.config.from_object(__name__)
+Session(app)
+
+def get_user_details():
+    if session.get('user_name_check') == 0:
+        bot_response = 'Please enter your name'
+        return render_template('index.html', bot_response=bot_response)
+    if session.get('user_location_check') == 0:
+        bot_response = 'Please enter your location'
+        return render_template('index.html', user_input=session.get('user_name'), bot_response=bot_response)
+    if session.get('user_age_check') == 0:
+        bot_response = 'Please enter your age'
+        return render_template('index.html', user_input=session.get('user_location'), bot_response=bot_response)
+    if session.get('user_gender_check') == 0:
+        bot_response = 'Please enter your gender'
+        return render_template('index.html', user_input=session.get('user_age'), bot_response=bot_response)
+
+def flush_all_values():
+    session['user_name_check'] = 0
+    session['user_location_check'] = 0
+    session['user_age_check'] = 0
+    session['user_gender_check'] = 0
+    session['all_checked_check'] = 0
+    session['user_name'] = ''
+    session['user_location'] = ''
+    session['user_age'] = 0
+    session['user_gender'] = ''
 
 @app.route('/')
 def index():
+    session['user_name_check'] = 0
+    session['user_location_check'] = 0
+    session['user_age_check'] = 0
+    session['user_gender_check'] = 0
+    session['all_checked_check'] = 0
+    session['user_name'] = ''
+    session['user_location'] = ''
+    session['user_age'] = 0
+    session['user_gender'] = ''
     return render_template('index.html')
 
 @app.route('/initialize', methods=['POST'])
+
 def initialize():
     if request.form['initialize_bot'] == 'Initialize':
-        flush_all_checks()
+        flush_all_values()
+        print('x')
         x = get_user_details()
         return x
     else:
@@ -137,50 +151,55 @@ def initialize():
 
 @app.route('/process', methods=['POST'])
 def process():
-    global user_name_check, user_name, user_location_check, user_location, user_age_check, user_age, user_gender_check, user_gender, all_checked_check
 
-    if user_name_check == 0:
-        user_name = request.form['user_input']
-        if user_name.isalpha():
-            user_name_check = 1
+    if session.get('user_name_check') == 0:
+        session['user_name'] = request.form['user_input']
+        if session.get('user_name').isalpha():
+            session['user_name_check'] = 1
             x = get_user_details()
             return x
         else:
             return render_template('index.html', bot_response='Name should only contain alphabets, Please enter your name again')
-    if user_location_check == 0:
-        user_location = str(request.form['user_input'])
-        if user_location.upper() in (city.upper() for city in world_cities_df['name'].values):
-            user_location_check = 1
+    if session.get('user_location_check') == 0:
+        session['user_location'] = str(request.form['user_input'])
+        if session.get('user_location').upper() in (city.upper() for city in world_cities_df['name'].values):
+            session['user_location_check'] = 1
             x = get_user_details()
             return x
         else:
             return render_template('index.html', bot_response='Please enter correct city name')
-    if user_age_check == 0:
+    if session.get('user_age_check') == 0:
         user_age_to_modify = request.form['user_input']
         if user_age_to_modify.isdigit() and 1 <= int(user_age_to_modify) <= 100:
-            user_age = str(user_age_to_modify) + ' ' + 'years'
-            user_age_check = 1
+            session['user_age'] = str(user_age_to_modify) + ' ' + 'years'
+            session['user_age_check'] = 1
             x = get_user_details()
             return x
         else:
             return render_template('index.html', bot_response='Please enter valid age value')
-    if user_gender_check == 0:
-        user_gender = str(request.form['user_input'])
-        if user_gender in ['male', 'female', 'other', 'Male', 'Female', 'Other']:
-            user_gender_check = 1
-            all_checked_check = 1
+    if session.get('user_gender_check') == 0:
+        user_gender_to_check = str(request.form['user_input'])
+        if user_gender_to_check in ['male', 'female', 'other', 'Male', 'Female', 'Other']:
+            session['user_gender'] = user_gender_to_check
+            session['user_gender_check'] = 1
+            session['all_checked_check'] = 1
         else:
             return render_template('index.html', bot_response='Please ensure gender value is among "Male", "Female" and "Other" ')
 
-    if user_name_check == 1 and user_location_check == 1 and user_age_check == 1 and user_gender_check == 1:
+    if session.get('user_name_check') == 1 and session.get('user_location_check') == 1 and session.get('user_age_check') == 1 and session.get('user_gender_check') == 1:
         print("all checked")
-        if all_checked_check == 1:
-            default_response = 'Hi {}, I am Bowhead Bot, I can help you get to know more about Bowhead Health and the services we provide. Also I can help you find information about medical trials.'.format(user_name)
-            all_checked_check = 2
+        if session.get('all_checked_check') == 1:
+            default_response = 'Hi {}, I am Bowhead Bot, I can help you get to know more about Bowhead Health and the services we provide. Also I can help you find information about medical trials.'.format(session.get('user_name'))
+            session['all_checked_check'] = 2
             return render_template('index.html', bot_response=default_response)
 
+        user_name = session.get('user_name')
+        user_location = session.get('user_location')
+        user_age = session.get('user_age')
+        user_gender = session.get('user_gender')
         user_input = request.form['user_input']
         user_input_df = get_text(user_input)
+        print(user_name,user_location,user_age,user_gender,user_input_df)
         bot_response_pred = botResponse(user_input_df, user_name, user_location, user_age, user_gender)
         bot_response = bot_response_pred['response']
         bot_pred = bot_response_pred['pred']
