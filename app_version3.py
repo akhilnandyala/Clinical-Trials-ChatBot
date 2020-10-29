@@ -19,15 +19,6 @@ world_cities_df = pd.read_csv(Path.joinpath(Path.cwd(), 'world-cities_csv.csv'))
 
 original_input_text = ''
 # voice_input_check = 0
-# user_name = ''
-# user_location = ''
-# user_age = 0
-# user_gender = ''
-# user_name_check = 0
-# user_location_check = 0
-# user_age_check = 0
-# user_gender_check = 0
-# all_checked_check = 0
 
 def get_pred(encoded_input):
     model = load_model(Path.joinpath(Path.cwd(), 'model-v1.h5'))
@@ -117,7 +108,11 @@ def get_user_details():
         return render_template('index.html', user_input=user_age, bot_response=bot_response)
 
 def flush_all_checks():
-    global user_name_check, user_location_check, user_age_check, user_gender_check, all_checked_check
+    global user_name, user_location, user_age, user_gender, user_name_check, user_location_check, user_age_check, user_gender_check, all_checked_check
+    user_name = ''
+    user_location = ''
+    user_age = 0
+    user_gender = ''
     user_name_check = 0
     user_location_check = 0
     user_age_check = 0
@@ -151,7 +146,7 @@ def process():
             x = get_user_details()
             return x
         else:
-            return render_template('index.html', bot_response='Name should only contain alphabets, Please enter you name again')
+            return render_template('index.html', bot_response='Name should only contain alphabets, Please enter your name again')
     if user_location_check == 0:
         user_location = str(request.form['user_input'])
         if user_location.upper() in (city.upper() for city in world_cities_df['name'].values):
