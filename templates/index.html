@@ -7,6 +7,7 @@
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.1/socket.io.js"></script>
 </head>
 <body>
 <div class="container">
@@ -23,13 +24,16 @@ User: {{user_input}}
 <div class="alert alert-dark" role="alert">
     Bowhead Bot: {{ bot_response|safe }}
 </div>
+    <button class="btn btn-primary" id="voice">Talk</button>
 
     <form  action="/process" method="POST">
   <div class="form-group">
-    <input type="text" name="user_input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Type your input here"><br>
+    <input type="text" id="u_input" name="user_input" class="form-control"  placeholder="Type your input here"><br>
   <button type="submit" class="btn btn-primary">Send</button>
   </div>
 </form>
+
 </div>
+    <script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>

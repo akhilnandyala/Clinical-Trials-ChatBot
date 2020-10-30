@@ -9,3 +9,10 @@
 .alert-dark {
     min-width: 218px;
 }
+
+#voice {
+    background-color:red;
+    margin-left: 100%;
+    padding: 6px 12px;
+    margin-bottom: -5%;
+}

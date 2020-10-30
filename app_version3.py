@@ -135,12 +135,14 @@ def index():
     session['user_location'] = ''
     session['user_age'] = 0
     session['user_gender'] = ''
+    session['initialize_check'] = 0
     return render_template('index.html')
 
 @app.route('/initialize', methods=['POST'])
 
 def initialize():
     if request.form['initialize_bot'] == 'Initialize':
+        session['initialize_check'] = 1
         flush_all_values()
         print('x')
         x = get_user_details()
@@ -150,61 +152,64 @@ def initialize():
 
 @app.route('/process', methods=['POST'])
 def process():
-    if session.get('user_name_check') == 0:
-        session['user_name'] = request.form['user_input']
-        if session.get('user_name').isalpha():
-            session['user_name_check'] = 1
-            x = get_user_details()
-            return x
-        else:
-            return render_template('index.html', bot_response='Name should only contain alphabets, Please enter your name again')
-    if session.get('user_location_check') == 0:
-        session['user_location'] = str(request.form['user_input'])
-        if session.get('user_location').upper() in (city.upper() for city in world_cities_df['name'].values):
-            session['user_location_check'] = 1
-            x = get_user_details()
-            return x
-        else:
-            return render_template('index.html', bot_response='Please enter correct city name')
-    if session.get('user_age_check') == 0:
-        user_age_to_modify = request.form['user_input']
-        if user_age_to_modify.isdigit() and 1 <= int(user_age_to_modify) <= 100:
-            session['user_age'] = str(user_age_to_modify) + ' ' + 'years'
-            session['user_age_check'] = 1
-            x = get_user_details()
-            return x
-        else:
-            return render_template('index.html', bot_response='Please enter valid age value')
-    if session.get('user_gender_check') == 0:
-        user_gender_to_check = str(request.form['user_input'])
-        if user_gender_to_check in ['male', 'female', 'other', 'Male', 'Female', 'Other']:
-            session['user_gender'] = user_gender_to_check
-            session['user_gender_check'] = 1
-            session['all_checked_check'] = 1
-        else:
-            return render_template('index.html', bot_response='Please ensure gender value is among "Male", "Female" and "Other" ')
+    if session.get('initialize_check') == 1:
+        if session.get('user_name_check') == 0:
+            session['user_name'] = request.form['user_input']
+            if session.get('user_name').isalpha():
+                session['user_name_check'] = 1
+                x = get_user_details()
+                return x
+            else:
+                return render_template('index.html', bot_response='Name should only contain alphabets, Please enter your name again')
+        if session.get('user_location_check') == 0:
+            session['user_location'] = str(request.form['user_input'])
+            if session.get('user_location').upper() in (city.upper() for city in world_cities_df['name'].values):
+                session['user_location_check'] = 1
+                x = get_user_details()
+                return x
+            else:
+                return render_template('index.html', bot_response='Please enter correct city name')
+        if session.get('user_age_check') == 0:
+            user_age_to_modify = request.form['user_input']
+            if user_age_to_modify.isdigit() and 1 <= int(user_age_to_modify) <= 100:
+                session['user_age'] = str(user_age_to_modify) + ' ' + 'years'
+                session['user_age_check'] = 1
+                x = get_user_details()
+                return x
+            else:
+                return render_template('index.html', bot_response='Please enter valid age value')
+        if session.get('user_gender_check') == 0:
+            user_gender_to_check = str(request.form['user_input'])
+            if user_gender_to_check in ['male', 'female', 'other', 'Male', 'Female', 'Other']:
+                session['user_gender'] = user_gender_to_check
+                session['user_gender_check'] = 1
+                session['all_checked_check'] = 1
+            else:
+                return render_template('index.html', bot_response='Please ensure gender value is among "Male", "Female" and "Other" ')
 
-    if session.get('user_name_check') == 1 and session.get('user_location_check') == 1 and session.get('user_age_check') == 1 and session.get('user_gender_check') == 1:
-        print("all checked")
-        if session.get('all_checked_check') == 1:
-            default_response = 'Hi {}, I am Bowhead Bot, I can help you get to know more about Bowhead Health and the services we provide. Also I can help you find information about medical trials.'.format(session.get('user_name'))
-            session['all_checked_check'] = 2
-            return render_template('index.html', bot_response=default_response)
-        print('if',session.get('user_name_check'),session.get('user_location_check'),session.get('user_age_check'),session.get('user_gender_check'),session.get('all_checked_check'))
-        user_name = session.get('user_name')
-        user_location = session.get('user_location')
-        user_age = session.get('user_age')
-        user_gender = session.get('user_gender')
-        user_input = request.form['user_input']
-        user_input_df = get_text(user_input)
-        print(user_name,user_location,user_age,user_gender,user_input_df)
-        bot_response_pred = botResponse(user_input_df, user_name, user_location, user_age, user_gender)
-        bot_response = bot_response_pred['response']
-        bot_pred = bot_response_pred['pred']
-        return render_template('index.html', user_input=user_input, bot_response=bot_response)
+        if session.get('user_name_check') == 1 and session.get('user_location_check') == 1 and session.get('user_age_check') == 1 and session.get('user_gender_check') == 1:
+            print("all checked")
+            if session.get('all_checked_check') == 1:
+                default_response = 'Hi {}, I am Bowhead Bot, I can help you get to know more about Bowhead Health and the services we provide. Also I can help you find information about medical trials.'.format(session.get('user_name'))
+                session['all_checked_check'] = 2
+                return render_template('index.html', bot_response=default_response)
+            print('if',session.get('user_name_check'),session.get('user_location_check'),session.get('user_age_check'),session.get('user_gender_check'),session.get('all_checked_check'))
+            user_name = session.get('user_name')
+            user_location = session.get('user_location')
+            user_age = session.get('user_age')
+            user_gender = session.get('user_gender')
+            user_input = request.form['user_input']
+            user_input_df = get_text(user_input)
+            print(user_name,user_location,user_age,user_gender,user_input_df)
+            bot_response_pred = botResponse(user_input_df, user_name, user_location, user_age, user_gender)
+            bot_response = bot_response_pred['response']
+            bot_pred = bot_response_pred['pred']
+            return render_template('index.html', user_input=user_input, bot_response=bot_response)
+        else:
+            print('else',session.get('user_name_check'),session.get('user_location_check'),session.get('user_age_check'),session.get('user_gender_check'),session.get('all_checked_check'))
+            return render_template('index.html', bot_response='Please enter correct values to user details')
     else:
-        print('else',session.get('user_name_check'),session.get('user_location_check'),session.get('user_age_check'),session.get('user_gender_check'),session.get('all_checked_check'))
-        return render_template('index.html', bot_response='Please enter correct values to user details')
+        return render_template('index.html', bot_response='Please initialize the bot before first use')
 
 
 if __name__ == '__main__':
