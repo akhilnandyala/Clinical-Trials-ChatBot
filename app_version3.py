@@ -67,6 +67,8 @@ def botResponse(user_input, user_name, user_location, user_age, user_gender='All
             med_condition_word_combo_list = list(map(' '.join, zip(med_condition_word_list[:-1], med_condition_word_list[1:])))
             if re.search(r['med_condition'], original_input_text, re.IGNORECASE) or any(x in original_input_text.upper() for x in med_condition_word_combo_list):
                 user_condition = r['med_condition']
+                print(r['med_condition'])
+                print('found in combo')
                 break
             else:
                 user_condition = 'none'
@@ -76,6 +78,7 @@ def botResponse(user_input, user_name, user_location, user_age, user_gender='All
                 med_condition_word_list = r['med_condition'].split()
                 if re.search(r['med_condition'], original_input_text, re.IGNORECASE) or any(x in original_input_text.upper() for x in med_condition_word_list):
                     user_condition = r['med_condition']
+                    print('found in single')
                     break
                 else:
                     user_condition = 'none'
@@ -91,6 +94,7 @@ def botResponse(user_input, user_name, user_location, user_age, user_gender='All
 def get_text(user_input):
     global original_input_text
     original_input_text = user_input
+    # original_input_text = 'Hey I need to find Hepatitis B trials'
     df_input = pd.DataFrame([user_input], columns=['questions'])
     return df_input
 
@@ -101,16 +105,16 @@ app.secret_key = secret
 
 def get_user_details():
     if session.get('user_name_check') == 0:
-        bot_response = 'Please enter your name'
+        bot_response = 'Hi, I am BowHead Bot !. Please let me know your name before we proceed.'
         return render_template('index.html', bot_response=bot_response)
     if session.get('user_location_check') == 0:
-        bot_response = 'Please enter your location'
+        bot_response = 'Thank you {}, Just a few more things before I can help you. What is your location? (city)'.format(session.get('user_name'))
         return render_template('index.html', user_input=session.get('user_name'), bot_response=bot_response)
     if session.get('user_age_check') == 0:
-        bot_response = 'Please enter your age'
+        bot_response = 'Almost done {} !, Please enter your age (in years).'.format(session.get('user_name'))
         return render_template('index.html', user_input=session.get('user_location'), bot_response=bot_response)
     if session.get('user_gender_check') == 0:
-        bot_response = 'Please enter your gender'
+        bot_response = 'Yay! Finishing things up {} ! Just one more thing, How do you identify yourself as ? (Others, Female, Male)'.format(session.get('user_name'))
         return render_template('index.html', user_input=session.get('user_age'), bot_response=bot_response)
 
 def flush_all_values():
@@ -190,7 +194,7 @@ def process():
         if session.get('user_name_check') == 1 and session.get('user_location_check') == 1 and session.get('user_age_check') == 1 and session.get('user_gender_check') == 1:
             print("all checked")
             if session.get('all_checked_check') == 1:
-                default_response = 'Hi {}, I am Bowhead Bot, I can help you get to know more about Bowhead Health and the services we provide. Also I can help you find information about medical trials.'.format(session.get('user_name'))
+                default_response = 'Great {}!, I can now help you get to know more about Bowhead Health and the services we provide. Also, you can ask information about any medical trial you require.'.format(session.get('user_name'))
                 session['all_checked_check'] = 2
                 return render_template('index.html', bot_response=default_response)
             print('if',session.get('user_name_check'),session.get('user_location_check'),session.get('user_age_check'),session.get('user_gender_check'),session.get('all_checked_check'))
@@ -201,6 +205,10 @@ def process():
             user_input = request.form['user_input']
             user_input_df = get_text(user_input)
             print(user_name,user_location,user_age,user_gender,user_input_df)
+            # user_name = 'Akhil'
+            # user_location = 'Ottawa'
+            # user_age = '20 Years'
+            # user_gender = 'Male'
             bot_response_pred = botResponse(user_input_df, user_name, user_location, user_age, user_gender)
             bot_response = bot_response_pred['response']
             bot_pred = bot_response_pred['pred']

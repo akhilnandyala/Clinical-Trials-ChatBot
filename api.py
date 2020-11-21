@@ -2,6 +2,7 @@ import json
 import requests
 import pandas as pd
 import codecs
+import re
 from pytrials.client import ClinicalTrials
 
 pd.set_option('display.max_rows', None)
@@ -30,13 +31,21 @@ def trial_details(user_condition, user_location, user_age, user_gender):
 
     ct_df = pd.DataFrame.from_records(corona_fields[1:], columns=corona_fields[0])
     ct_df['NCTId'] = ct_df['NCTId'].apply(lambda x: 'https://clinicaltrials.gov/show/' + x)
-
     ct_df['NCTId'] = ct_df['NCTId'].apply(make_clickable)
 
-    ct_df = ct_df.to_html(escape=False, border=0)
+    for i, r in ct_df.iterrows():
+        if not re.search(user_condition, r['Condition'], re.IGNORECASE):
+            ct_df.drop(i, inplace=True)
+        else:
+            continue
+
+    if ct_df.empty:
+        ct_df = 'No results found for the medical condition based on given information. You can modify your question or you can re-initialize the bot to modify your preferences. Thank you.'
+    else:
+        ct_df = ct_df.to_html(escape=False, border=0)
 
     # print(ct_df)
     return ct_df
 
-# trial_details("covid",'Ottawa', '23 years', "Male")
+trial_details("Breast cancer",'Ottawa', '20 years', "Male")
 
