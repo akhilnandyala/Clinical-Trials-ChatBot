@@ -33,8 +33,13 @@ def trial_details(user_condition, user_location, user_age, user_gender):
     ct_df['NCTId'] = ct_df['NCTId'].apply(lambda x: 'https://clinicaltrials.gov/show/' + x)
     ct_df['NCTId'] = ct_df['NCTId'].apply(make_clickable)
 
+    user_condition_word_list = user_condition.split()
+    user_condition_word_combo_list = list(map(' '.join, zip(user_condition_word_list[:-1], user_condition_word_list[1:])))
+
     for i, r in ct_df.iterrows():
-        if not re.search(user_condition, r['Condition'], re.IGNORECASE):
+        if any(x in r['Condition'].upper() for x in user_condition_word_combo_list):
+            continue
+        elif not re.search(user_condition, r['Condition'], re.IGNORECASE):
             ct_df.drop(i, inplace=True)
         else:
             continue
@@ -44,7 +49,7 @@ def trial_details(user_condition, user_location, user_age, user_gender):
     else:
         ct_df = ct_df.to_html(escape=False, border=0)
 
-    # print(ct_df)
+    print(ct_df)
     return ct_df
 
 trial_details("Breast cancer",'Ottawa', '20 years', "Male")

@@ -65,9 +65,11 @@ def botResponse(user_input, user_name, user_location, user_age, user_gender='All
         for i, r in condition_df.iterrows():
             med_condition_word_list = r['med_condition'].split()
             med_condition_word_combo_list = list(map(' '.join, zip(med_condition_word_list[:-1], med_condition_word_list[1:])))
+            print(original_input_text)
             if re.search(r['med_condition'], original_input_text, re.IGNORECASE) or any(x in original_input_text.upper() for x in med_condition_word_combo_list):
-                user_condition = r['med_condition']
                 print(r['med_condition'])
+                user_condition = r['med_condition']
+                print(user_condition)
                 print('found in combo')
                 break
             else:
@@ -76,6 +78,7 @@ def botResponse(user_input, user_name, user_location, user_age, user_gender='All
         if user_condition == 'none':
             for i, r in condition_df.iterrows():
                 med_condition_word_list = r['med_condition'].split()
+                print(original_input_text)
                 if re.search(r['med_condition'], original_input_text, re.IGNORECASE) or any(x in original_input_text.upper() for x in med_condition_word_list):
                     user_condition = r['med_condition']
                     print('found in single')
