@@ -1,8 +1,7 @@
-name,country,subcountry,geonameid
-les Escaldes,Andorra,Escaldes-Engordany,3040051
+city,country,state,geonameid
 Andorra la Vella,Andorra,Andorra la Vella,3041563
 Umm al Qaywayn,United Arab Emirates,Umm al Qaywayn,290594
-Ras al-Khaimah,United Arab Emirates,Raʼs al Khaymah,291074
+Ras al-Khaimah,United Arab Emirates,Ra's al Khaymah,291074
 Khawr Fakkān,United Arab Emirates,Ash Shāriqah,291696
 Dubai,United Arab Emirates,Dubai,292223
 Dibba Al-Fujairah,United Arab Emirates,Al Fujayrah,292231
@@ -63,7 +62,6 @@ Andkhōy,Afghanistan,Faryab,1148658
 Bāzārak,Afghanistan,Panjshir,1429434
 Markaz-e Woluswalī-ye Āchīn,Afghanistan,Nangarhār,1469706
 Saint John’s,Antigua and Barbuda,Saint John,3576022
-The Valley,Anguilla,N/A,3573374
 Sarandë,Albania,Vlorë,363243
 Kukës,Albania,Kukës,782661
 Korçë,Albania,Korçë,782756
@@ -571,9 +569,6 @@ Frankston South,Australia,Victoria,9972527
 Sunshine West,Australia,Victoria,9972578
 Altona Meadows,Australia,Victoria,9972579
 West Pennant,Australia,New South Wales,9972964
-Oranjestad,Aruba,N/A,3577154
-Babijn,Aruba,N/A,3577277
-Angochi,Aruba,N/A,3577284
 Mariehamn,Aland Islands,Mariehamns stad,3041732
 Xankandi,Azerbaijan,Xankǝndi,146970
 Əhmədbəyli,Azerbaijan,Saatlı,147059
@@ -1069,7 +1064,6 @@ Aplahoué,Benin,Kouffo,2395568
 Allada,Benin,Atlantique,2395635
 Abomey-Calavi,Benin,Atlantique,2395914
 Abomey,Benin,Zou,2395915
-Gustavia,Saint Barthelemy,N/A,3579132
 Hamilton,Bermuda,Hamilton city,3573197
 Tutong,Brunei,Tutong,1820071
 Seria,Brunei,Belait,1820187
@@ -2603,7 +2597,7 @@ Ancaster,Canada,Ontario,8285452
 West Vancouver,Canada,British Columbia,8533869
 Willowdale,Canada,Ontario,8558534
 Lower Sacvkille,Canada,Nova Scotia,10287505
-West Island,Cocos Islands,N/A,7304591
+West Island,Cocos Islands,no-state,7304591
 Yangambi,Democratic Republic of the Congo,Eastern Province,203717
 Watsa,Democratic Republic of the Congo,Eastern Province,204283
 Wamba,Democratic Republic of the Congo,Eastern Province,204318
@@ -2842,7 +2836,6 @@ Abidjan,Ivory Coast,Lagunes,2293538
 Abengourou,Ivory Coast,Moyen-Comoé,2293549
 Séguéla,Ivory Coast,Worodougou,2596934
 Soubré,Ivory Coast,Bas-Sassandra,2598243
-Avarua,Cook Islands,N/A,4035715
 Viña del Mar,Chile,Valparaíso,3868121
 Villarrica,Chile,Araucanía,3868158
 Villa Alemana,Chile,Valparaíso,3868192
@@ -4193,8 +4186,6 @@ Santa Maria,Cape Verde,Sal,3374218
 Praia,Cape Verde,Praia,3374333
 Mindelo,Cape Verde,São Vicente,3374462
 Cova Figueira,Cape Verde,Santa Catarina do Fogo,3374707
-Willemstad,Curacao,N/A,3513090
-Flying Fish Cove,Christmas Island,N/A,2078127
 Protaras,Cyprus,Ammochostos,18918
 Paphos,Cyprus,Pafos,146214
 Nicosia,Cyprus,Lefkosia,146268
@@ -6629,7 +6620,6 @@ Suva,Fiji,Central,2198148
 Nadi,Fiji,Western,2202064
 Lautoka,Fiji,Western,2204506
 Labasa,Fiji,Northern,2204582
-Stanley,Falkland Islands,N/A,3426691
 Palikir - National Government Center,Micronesia,Pohnpei,2081986
 Tórshavn,Faroe Islands,Streymoy,2611396
 Yerres,France,Île-de-France,2967245
@@ -7874,7 +7864,6 @@ Agogo,Ghana,Ashanti,2305537
 Achiaman,Ghana,Greater Accra,2306079
 Accra,Ghana,Greater Accra,2306104
 Aburi,Ghana,Eastern,2306119
-Gibraltar,Gibraltar,N/A,2411585
 Nuuk,Greenland,Sermersooq,3421319
 Sukuta,Gambia,Western,2411880
 Lamin,Gambia,North Bank,2412749
@@ -8023,7 +8012,6 @@ Péfki,Greece,Attica,8358562
 Ágioi Anárgyroi,Greece,Attica,8358563
 Agios Ioannis Rentis,Greece,Attica,8478257
 Néa Ionía,Greece,Thessaly,9034728
-Grytviken,South Georgia and the South Sandwich Islands,N/A,3426466
 Zacapa,Guatemala,Zacapa,3587587
 Villa Nueva,Guatemala,Guatemala,3587902
 Villa Canales,Guatemala,Guatemala,3587923
@@ -8388,7 +8376,7 @@ Sungai Raya,Indonesia,West Kalimantan,1625908
 Sungai Penuh,Indonesia,Jambi,1625929
 Sungailiat,Indonesia,Bangka–Belitung Islands,1625958
 Sumenep,Indonesia,East Java,1626099
-Sumedang Utara,Indonesia,N/A,1626100
+Sumedang Utara,Indonesia,no-state,1626100
 Sumberpucung,Indonesia,East Java,1626134
 Sumber,Indonesia,West Java,1626183
 Sumbawa Besar,Indonesia,West Nusa Tenggara,1626185
@@ -13127,7 +13115,7 @@ Seogwipo,South Korea,Jeju-do,6621166
 Changnyeong,South Korea,Gyeongsangnam-do,6903078
 Janūb as Surrah,Kuwait,Al Farwaniyah,285603
 Ḩawallī,Kuwait,Muḩāfaz̧at Ḩawallī,285629
-Bayān,Kuwait,N/A,285663
+Bayān,Kuwait,no-state,285663
 As Sālimīyah,Kuwait,Muḩāfaz̧at Ḩawallī,285704
 Ar Rumaythīyah,Kuwait,Muḩāfaz̧at Ḩawallī,285726
 Ar Riqqah,Kuwait,Al Aḩmadī,285728
@@ -13484,8 +13472,8 @@ Agadir,Morocco,Souss-Massa-Drâa,2561668
 Skhirate,Morocco,Rabat-Salé-Zemmour-Zaër,2562055
 Boujniba,Morocco,Chaouia-Ouardigha,6546693
 Dakhla,Morocco,Oued ed Dahab-Lagouira,8542188
-Monte-Carlo,Monaco,,2992741
-Monaco,Monaco,,2993458
+Monte-Carlo,Monaco,no-state,2992741
+Monaco,Monaco,no-state,2993458
 Edineţ,Moldova,Raionul Edineţ,617076
 Ungheni,Moldova,Ungheni,617180
 Tiraspolul,Moldova,Stînga Nistrului,617239
@@ -13514,7 +13502,7 @@ Cetinje,Montenegro,Cetinje,3202641
 Budva,Montenegro,Budva,3203106
 Bijelo Polje,Montenegro,Bijelo Polje,3204176
 Bar,Montenegro,Bar,3204509
-Marigot,Saint Martin,N/A,3578851
+Marigot,Saint Martin,no-state,3578851
 Toamasina,Madagascar,Atsinanana,1053384
 Vondrozo,Madagascar,Atsimo-Atsinanana,1053507
 Vohipaho,Madagascar,Atsimo-Atsinanana,1053778
@@ -14566,7 +14554,7 @@ Dakoro,Niger,Maradi,2446267
 Ayorou,Niger,Tillabéri,2447416
 Alaghsas,Niger,Agadez,2447938
 Agadez,Niger,Agadez,2448085
-Kingston,Norfolk Island,N/A,2161314
+Kingston,Norfolk Island,no-state,2161314
 Zuru,Nigeria,Kebbi,2317548
 Zungeru,Nigeria,Niger,2317569
 Zaria,Nigeria,Kaduna,2317765
@@ -15176,7 +15164,7 @@ Birendranagar,Nepal,Mid Western,6254843
 Dipayal,Nepal,Far Western,6254845
 Nepalgunj,Nepal,Mid Western,6941099
 Yaren,Nauru,Yaren,7626461
-Alofi,Niue,N/A,4036284
+Alofi,Niue,no-state,4036284
 Wellington,New Zealand,Wellington,2179537
 Wanganui,New Zealand,Manawatu-Wanganui,2179670
 Timaru,New Zealand,Canterbury,2181133
@@ -16463,7 +16451,7 @@ Praga Północ,Poland,Masovian Voivodeship,6545347
 Praga Południe,Poland,Masovian Voivodeship,6545348
 Jelcz Laskowice,Poland,Lower Silesian Voivodeship,7303641
 Saint-Pierre,Saint Pierre and Miquelon,Saint-Pierre,3424934
-Adamstown,Pitcairn,N/A,4030723
+Adamstown,Pitcairn,no-state,4030723
 Aguadilla,Puerto Rico,Aguadilla,4562506
 Arecibo,Puerto Rico,Arecibo,4562635
 Barceloneta,Puerto Rico,Barceloneta,4562768
@@ -16681,7 +16669,7 @@ Saint-André,Reunion,Réunion,935268
 Le Tampon,Reunion,Réunion,935582
 Le Port,Reunion,Réunion,935616
 La Possession,Reunion,Réunion,935691
-Piton Saint-Leu,Reunion,N/A,7932385
+Piton Saint-Leu,Reunion,no-state,7932385
 Zimnicea,Romania,Teleorman,662187
 Zărnești,Romania,Braşov,662284
 Zalău,Romania,Sălaj,662334
@@ -18350,7 +18338,7 @@ Antiguo Cuscatlán,El Salvador,La Libertad,3587362
 Ahuachapán,El Salvador,Ahuachapán,3587426
 Aguilares,El Salvador,San Salvador,3587428
 Acajutla,El Salvador,Sonsonate,3587498
-Philipsburg,Sint Maarten,N/A,3513392
+Philipsburg,Sint Maarten,no-state,3513392
 Yabrūd,Syria,Rif-dimashq,162627
 Ţayyibat al Imām,Syria,Hama,163270
 Tartouss,Syria,Tartus,163345
@@ -18428,7 +18416,7 @@ Hajīn,Syria,Deir ez-Zor,174506
 Mbabane,Swaziland,Hhohho,934985
 Manzini,Swaziland,Manzini,934995
 Lobamba,Swaziland,Hhohho,935048
-Cockburn Town,Turks and Caicos Islands,N/A,3576994
+Cockburn Town,Turks and Caicos Islands,no-state,3576994
 Fada,Chad,Ennedi-Ouest,244128
 Am Timan,Chad,Salamat,245338
 Abéché,Chad,Ouaddaï,245785
@@ -21899,7 +21887,6 @@ Oakland,United States,California,5378538
 Oakley,United States,California,5378566
 Oceanside,United States,California,5378771
 Oildale,United States,California,5378870
-Ontario,United States,California,5379439
 Orange,United States,California,5379513
 Orangevale,United States,California,5379566
 Orcutt,United States,California,5379609
@@ -22556,7 +22543,7 @@ Andijon,Uzbekistan,Andijon,1514588
 Oltiariq,Uzbekistan,Fergana,1514615
 Quva,Uzbekistan,Fergana,1526979
 Navoiy,Uzbekistan,Navoiy,1538229
-Vatican City,Vatican,N/A,6691831
+Vatican City,Vatican,no-state,6691831
 Kingstown,Saint Vincent and the Grenadines,Saint George,3577887
 Kingstown Park,Saint Vincent and the Grenadines,Saint George,3748726
 La Asunción,Venezuela,Nueva Esparta,3480908
@@ -22665,8 +22652,8 @@ Caucaguita,Venezuela,Miranda,3803515
 La Dolorita,Venezuela,Miranda,3803651
 Guasdualito,Venezuela,Apure,3804949
 San Fernando de Apure,Venezuela,Apure,3805673
-Road Town,British Virgin Islands,N/A,3577430
-Tortola,British Virgin Islands,N/A,8533874
+Road Town,British Virgin Islands,no-state,3577430
+Tortola,British Virgin Islands,no-state,8533874
 Charlotte Amalie,U.S. Virgin Islands,Saint Thomas Island,4795467
 Saint Croix,U.S. Virgin Islands,Saint Croix Island,4796512
 Yên Vinh,Vietnam,Nghệ An,1560037

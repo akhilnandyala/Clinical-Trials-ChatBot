@@ -36,6 +36,6 @@ def encode_input_text(tokenizer_t,df,feature):
     t = tokenizer_t
     entry = entry = [df[feature][0]]
     encoded = t.texts_to_sequences(entry)
-    padded = pad_sequences(encoded, maxlen=8, padding='post')
+    padded = pad_sequences(encoded, maxlen=9, padding='post')
     return padded
 

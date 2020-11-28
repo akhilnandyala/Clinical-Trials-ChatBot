@@ -1,0 +1,53 @@
+{"intents": [
+        { "tag": "start_conversation",
+          "patterns": ["Hi there", "Is anyone there?", "Hey", "Hola", "Hello", "Hi"],
+          "responses": ["Hello", "Happy to have you here", "Good to see you again", "Hi there, how can I help?"],
+          "context": [""]
+        },
+	    { "tag": "what_are_you",
+          "patterns": ["What is your name?", "what are you?", "who are you?", "your name pls?"],
+          "responses": ["Hi, I'm  Bowhead Bot", "I'm Bowhead Bot ", "Call me Bowhead Bot"],
+          "context": [""]
+        },
+        { "tag": "end_conversation",
+          "patterns": ["Bye", "See you later", "Good bye", "Goodbye", "Nice chatting with you, bye"],
+          "responses": ["Have a lovely Day!", "Bye", "Happy to help you"],
+          "context": [""]
+        },
+        { "tag": "thanks",
+          "patterns": ["Thanks", "Thank you", "That is helpful", "Awesome, thanks", "Thanks for helping me"],
+          "responses": ["Happy to help!", "Any time!"],
+          "context": [""]
+        },
+        { "tag": "not_satisfied",
+          "patterns": ["That is not helpful", "You don't understand", "That is not what I want", "It is not what I asked for", "You are bad", "You do not seem to be of much help", "You are not helpful"],
+          "responses": ["Sorry, please rephrase your question", "I am still learning, please excuse me for my mistakes", "Sorry for that, what did you ask again ?"],
+          "context": [""]
+        },
+        { "tag": "confused",
+          "patterns": [],
+          "responses": ["Sorry, kindly rephrase the question","Sorry, can't understand you", "Please give me more information", "Not sure I understand"],
+          "context": [""]
+        },
+        { "tag": "options",
+          "patterns": ["How can you help me?", "What can you do?"],
+          "responses": ["I can help you get to know more about Bowhead Health and the services we provide, in particular, I can help you find Covid trials suitable to your needs"],
+          "context": [""]
+        },
+        { "tag": "services",
+          "patterns": ["What services do you provide?", "which services ?", "What services ?", "What other services do you offer ?", "Tell me few services", "How can you help other than trials ?"],
+          "responses": ["These are the services we provide", "Here are the services", "We provide following services"],
+          "context": [""]
+        },
+        { "tag": "trials",
+          "patterns": ["What can you tell me about covid trials", "I need some information about covid trials", "Covid trials information needed", "I want to know about covid trials", "Show me covid trials info", "I want to find hepatitis trials", "find heart trials details", "find medical trials info", "Diabetes trials"],
+          "responses": ["Sure let me get that info for you", "I will get that info for you", "Getting the info", "Gathering the trials information "],
+          "context": [""]
+        },
+        { "tag": "surveys",
+          "patterns": ["Can you help me find surveys ?", "I want to fill out a survey", "Find surveys", "Do you know where can I find surveys", "Find me some surveys", "Bowhead surveys", "What surveys do you offer ?", "Can you help me find some surveys ?", "Find me some survey", "Find me migraine survey"],
+          "responses": ["Sure, here are the surveys we provide", "we provide following surveys", "Take a look at the surveys we provide"],
+          "context": [""]
+        }
+   ]
+}

@@ -1,25 +1,31 @@
 ,responses,labels
-0,Hello,4
-1,Happy to have you here,4
-2,Good to see you again,4
-3,"Hi there, how can I help?",4
-4,"Hi, I'm  Bowhead Bot",6
-5,I'm Bowhead Bot ,6
-6,Call me Bowhead Bot,6
-7,Have a lovely Day!,2
-8,Bye,2
-9,Buhbyee !,2
-10,Happy to help you,2
-11,Happy to help!,5
-12,Any time!,5
-13,My pleasure,5
-14,Have fun,5
+0,Hello,5
+1,Happy to have you here,5
+2,Good to see you again,5
+3,"Hi there, how can I help?",5
+4,"Hi, I'm  Bowhead Bot",9
+5,I'm Bowhead Bot ,9
+6,Call me Bowhead Bot,9
+7,Have a lovely Day!,1
+8,Bye,1
+9,Happy to help you,1
+10,Happy to help!,7
+11,Any time!,7
+12,"Sorry, please rephrase your question",2
+13,"I am still learning, please excuse me for my mistakes",2
+14,"Sorry for that, what did you ask again ?",2
 15,"Sorry, kindly rephrase the question",0
 16,"Sorry, can't understand you",0
 17,Please give me more information,0
 18,Not sure I understand,0
 19,"I can help you get to know more about Bowhead Health and the services we provide, in particular, I can help you find Covid trials suitable to your needs",3
-20,Sure let me get that info for you,1
-21,I will get that info for you,1
-22,Getting the info,1
-23,Gathering the trials information ,1
+20,These are the services we provide,4
+21,Here are the services,4
+22,We provide following services,4
+23,Sure let me get that info for you,8
+24,I will get that info for you,8
+25,Getting the info,8
+26,Gathering the trials information ,8
+27,"Sure, here are the surveys we provide",6
+28,we provide following surveys,6
+29,Take a look at the surveys we provide,6

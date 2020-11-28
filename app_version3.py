@@ -16,13 +16,13 @@ vocab = joblib.load(Path.joinpath(Path.cwd(), 'vocab.pkl'))
 
 df2 = pd.read_csv(Path.joinpath(Path.cwd(), 'responses.csv'))
 condition_df = pd.read_csv(Path.joinpath(Path.cwd(), 'medical_condition.csv'))
-world_cities_df = pd.read_csv(Path.joinpath(Path.cwd(), 'world-cities_csv.csv'))
+world_places_df = pd.read_csv(Path.joinpath(Path.cwd(), 'world-cities_csv.csv'))
 
 original_input_text = ''
 # voice_input_check = 0
 
 def get_pred(encoded_input):
-    model = load_model(Path.joinpath(Path.cwd(), 'model-v1.h5'))
+    model = load_model(Path.joinpath(Path.cwd(), 'model-v2.h5'))
     pred = np.argmax(model.predict(encoded_input))
     return pred
 
@@ -61,16 +61,16 @@ def botResponse(user_input, user_name, user_location, user_age, user_gender='All
         else:
             response = get_response(df2, pred)
             response = bot_response(response)
-    elif pred == 1:
+    elif pred == 8:
         for i, r in condition_df.iterrows():
             med_condition_word_list = r['med_condition'].split()
             med_condition_word_combo_list = list(map(' '.join, zip(med_condition_word_list[:-1], med_condition_word_list[1:])))
-            print(original_input_text)
-            print(r['med_condition'])
+            # print(original_input_text)
+            # print(r['med_condition'])
             if re.search(r['med_condition'], original_input_text, re.IGNORECASE) or any(x in original_input_text.upper() for x in med_condition_word_combo_list):
-                print(r['med_condition'])
+                # print(r['med_condition'])
                 user_condition = r['med_condition']
-                print(user_condition)
+                # print(user_condition)
                 print('found in combo')
                 break
             else:
@@ -79,16 +79,61 @@ def botResponse(user_input, user_name, user_location, user_age, user_gender='All
         if user_condition == 'none':
             for i, r in condition_df.iterrows():
                 med_condition_word_list = r['med_condition'].split()
-                print(original_input_text)
-                if re.search(r['med_condition'], original_input_text, re.IGNORECASE) or any(x in original_input_text.upper() for x in med_condition_word_list):
-                    user_condition = r['med_condition']
-                    print('found in single')
+                med_condition_word_list = [i.upper() for i in med_condition_word_list]
+                original_input_text_words = original_input_text.split()
+                original_input_text_words = [i.upper() for i in original_input_text_words]
+                for x in med_condition_word_list:
+                    print(x)
+                    if x in original_input_text_words:
+                        print(med_condition_word_list)
+                        print(x)
+                        user_condition = x
+                        print('found in single')
+                        check = 1
+                        break
+                    else:
+                        check = 0
+                if check == 1:
                     break
                 else:
                     user_condition = 'none'
 
-        trial_data = api.trial_details(user_condition, user_location, user_age, user_gender)
+        world_cities = [i.upper() for i in world_places_df['city']]
+        world_countries = [i.upper() for i in world_places_df['country']]
+        world_states = [i.upper() for i in world_places_df['state']]
+
+        for i, r in world_places_df.iterrows():
+            original_input_text_words = original_input_text.split()
+            original_input_text_words = [i.upper() for i in original_input_text_words]
+            # print('city', r['city'])
+            if r['city'].upper() in original_input_text_words:
+                print('city', r['city'])
+                user_location = r['city']
+                location_code = 1
+                break
+            elif r['state'].upper() in original_input_text_words:
+                print('state', r['state'])
+                user_location = r['state']
+                location_code = 2
+                break
+            elif r['country'].upper() in original_input_text_words:
+                print('country', r['country'])
+                user_location = r['country']
+                location_code = 3
+                break
+            else:
+                location_code = 1
+
+        print(user_condition)
+        trial_data = api.trial_details(user_condition, location_code, user_location, user_age, user_gender)
         response = trial_data
+
+    elif pred == 4:
+        response = call_services()
+
+    elif pred == 6:
+        response = call_surveys()
+
     else:
         response = get_response(df2, pred)
         response = bot_response(response)
@@ -98,7 +143,6 @@ def botResponse(user_input, user_name, user_location, user_age, user_gender='All
 def get_text(user_input):
     global original_input_text
     original_input_text = user_input
-    # original_input_text = 'Hey I need to find Hepatitis B trials'
     df_input = pd.DataFrame([user_input], columns=['questions'])
     return df_input
 
@@ -109,17 +153,27 @@ app.secret_key = secret
 
 def get_user_details():
     if session.get('user_name_check') == 0:
-        bot_response = 'Hi, I am BowHead Bot !. Please let me know your name before we proceed.'
+        bot_response = 'Hi, I am BowHead Bot ! Please let me know your name before we proceed.'
         return render_template('index.html', bot_response=bot_response)
     if session.get('user_location_check') == 0:
         bot_response = 'Thank you {}, Just a few more things before I can help you. What is your location? (city)'.format(session.get('user_name'))
         return render_template('index.html', user_input=session.get('user_name'), bot_response=bot_response)
     if session.get('user_age_check') == 0:
-        bot_response = 'Almost done {} !, Please enter your age (in years).'.format(session.get('user_name'))
+        bot_response = 'Almost done {}, Please enter your age in years.'.format(session.get('user_name'))
         return render_template('index.html', user_input=session.get('user_location'), bot_response=bot_response)
     if session.get('user_gender_check') == 0:
-        bot_response = 'Yay! Finishing things up {} ! Just one more thing, How do you identify yourself as ? (Others, Female, Male)'.format(session.get('user_name'))
+        bot_response = 'Yay! Finishing things up {}. Just one more thing, Please let us know your gender for future reference (Others, Female, Male)'.format(session.get('user_name'))
         return render_template('index.html', user_input=session.get('user_age'), bot_response=bot_response)
+
+def call_services():
+    link = f"""<a target="_blank" href = "https://bowheadhealth.com/" >Bowhead Health</a>"""
+    output = 'We provide the following services: Surveys and Health check ups. You can get to know more by asking me about surveys or check out our website at {}'.format(link)
+    return output
+
+def call_surveys():
+    link = f"""<a target="_blank" href = "https://bowheadhealth.com/" >Bowhead Health</a>"""
+    output = 'The following surveys are offered at present: Migraine survey and Covid survey. More information is available at {}'.format(link)
+    return output
 
 def flush_all_values():
     session['user_name_check'] = 0
@@ -171,7 +225,7 @@ def process():
                 return render_template('index.html', bot_response='Name should only contain alphabets, Please enter your name again')
         if session.get('user_location_check') == 0:
             session['user_location'] = str(request.form['user_input'])
-            if session.get('user_location').upper() in (city.upper() for city in world_cities_df['name'].values):
+            if session.get('user_location').upper() in (city.upper() for city in world_places_df['city'].values):
                 session['user_location_check'] = 1
                 x = get_user_details()
                 return x
@@ -198,7 +252,7 @@ def process():
         if session.get('user_name_check') == 1 and session.get('user_location_check') == 1 and session.get('user_age_check') == 1 and session.get('user_gender_check') == 1:
             print("all checked")
             if session.get('all_checked_check') == 1:
-                default_response = 'Great {}!, I can now help you get to know more about Bowhead Health and the services we provide. Also, you can ask information about any medical trial you require.'.format(session.get('user_name'))
+                default_response = 'Great {}! I can now help you get to know more about Bowhead Health and the services we provide. Also, you can ask information about any medical trial you require.'.format(session.get('user_name'))
                 session['all_checked_check'] = 2
                 return render_template('index.html', bot_response=default_response)
             print('if',session.get('user_name_check'),session.get('user_location_check'),session.get('user_age_check'),session.get('user_gender_check'),session.get('all_checked_check'))
@@ -209,10 +263,6 @@ def process():
             user_input = request.form['user_input']
             user_input_df = get_text(user_input)
             print(user_name,user_location,user_age,user_gender,user_input_df)
-            # user_name = 'Akhil'
-            # user_location = 'Ottawa'
-            # user_age = '20 Years'
-            # user_gender = 'Male'
             bot_response_pred = botResponse(user_input_df, user_name, user_location, user_age, user_gender)
             bot_response = bot_response_pred['response']
             bot_pred = bot_response_pred['pred']

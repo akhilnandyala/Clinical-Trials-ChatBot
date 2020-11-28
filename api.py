@@ -16,12 +16,22 @@ def make_clickable(link):
     text = link.split('/')[4]
     return f'<a target="_blank" href="{link}">{text}</a>'
 
-def trial_details(user_condition, user_location, user_age, user_gender):
+def trial_details(user_condition, location_code, user_location, user_age, user_gender):
     ct = ClinicalTrials()
 
-    # ct.get_full_studies(search_expr="Coronavirus+COVID", max_studies=50)
+    if location_code == 1:
+        location_parameter = 'LocationCity'
+    elif location_code == 2:
+        location_parameter = 'LocationState'
+    elif location_code == 3:
+        location_parameter = 'LocationCountry'
 
-    search_query = '{} AND (SEARCH[Location](AREA[LocationCity]{}) AND AREA[MinimumAge]RANGE[MIN,{}] AND AREA[MaximumAge]RANGE[{},MAX] AND (AREA[Gender]All OR  AREA[Gender]{}))'.format(user_condition, user_location, user_age, user_age, user_gender)
+    print(location_code, location_parameter, user_location)
+
+    search_query = '{} AND (SEARCH[Location](AREA[{}]{}) AND AREA[MinimumAge]RANGE[MIN,{}] AND AREA[MaximumAge]RANGE[{},MAX] AND (AREA[Gender]All OR  AREA[Gender]{}))'.format(user_condition, location_parameter, user_location, user_age, user_age, user_gender)
+
+    print(search_query)
+
     corona_fields = ct.get_study_fields(
         search_expr=search_query,
         fields=["Gender", "MinimumAge", "MaximumAge", "NCTId", "Condition", "BriefTitle"],
@@ -52,5 +62,5 @@ def trial_details(user_condition, user_location, user_age, user_gender):
     print(ct_df)
     return ct_df
 
-trial_details("Breast cancer",'Ottawa', '20 years', "Male")
+# trial_details("Breast cancer", 1, 'Ottawa', '20 years', "Male")
 
