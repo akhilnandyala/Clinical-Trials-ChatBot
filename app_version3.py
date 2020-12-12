@@ -1,4 +1,4 @@
-from flask import Flask, render_template, render_template_string, request, session
+from flask import Flask, render_template, render_template_string, request, session, json
 import numpy as np
 import pandas as pd
 import preprocessor as p
@@ -150,20 +150,26 @@ def get_text(user_input):
 app = Flask(__name__)
 secret = 'adifjh34g5j43h534akjfn'
 app.secret_key = secret
+default_template = 'index.html'
 
 def get_user_details():
     if session.get('user_name_check') == 0:
-        bot_response = 'Hi, I am BowHead Bot ! Please let me know your name before we proceed.'
-        return render_template('index.html', bot_response=bot_response)
+        bot_response = "Hi, I am BowHead Bot ! Please let me know your name before we proceed."
+        # return render_template(default_template, bot_response=bot_response)
+        return json.dumps({"bot_response": bot_response})
     if session.get('user_location_check') == 0:
         bot_response = 'Thank you {}, Just a few more things before I can help you. What is your location? (city)'.format(session.get('user_name'))
-        return render_template('index.html', user_input=session.get('user_name'), bot_response=bot_response)
+        # return render_template(default_template, user_input=session.get('user_name'), bot_response=bot_response)
+        return json.dumps({"bot_response": bot_response})
     if session.get('user_age_check') == 0:
         bot_response = 'Almost done {}, Please enter your age in years.'.format(session.get('user_name'))
-        return render_template('index.html', user_input=session.get('user_location'), bot_response=bot_response)
+        # return render_template(default_template, user_input=session.get('user_location'), bot_response=bot_response)
+        return json.dumps({"bot_response": bot_response})
     if session.get('user_gender_check') == 0:
         bot_response = 'Yay! Finishing things up {}. Just one more thing, Please let us know your gender for future reference (Others, Female, Male)'.format(session.get('user_name'))
-        return render_template('index.html', user_input=session.get('user_age'), bot_response=bot_response)
+        # return render_template(default_template, user_input=session.get('user_age'), bot_response=bot_response)
+        return json.dumps({"bot_response": bot_response})
+
 
 def call_services():
     link = f"""<a target="_blank" href = "https://bowheadhealth.com/" >Bowhead Health</a>"""
@@ -198,21 +204,21 @@ def index():
     session['user_age'] = 0
     session['user_gender'] = ''
     session['initialize_check'] = 0
-    return render_template('index.html')
+    return render_template(default_template)
 
-@app.route('/initialize', methods=['POST'])
-
+@app.route('/initialize', methods=['GET','POST'])
 def initialize():
     if request.form['initialize_bot'] == 'Initialize':
+    # if request.args.get('initialize_bot') == 'Initialize':
         session['initialize_check'] = 1
         flush_all_values()
         print('x')
         x = get_user_details()
         return x
     else:
-        return render_template('index.html')
+        return render_template(default_template)
 
-@app.route('/process', methods=['POST'])
+@app.route('/process', methods=['GET','POST'])
 def process():
     if session.get('initialize_check') == 1:
         if session.get('user_name_check') == 0:
@@ -222,7 +228,8 @@ def process():
                 x = get_user_details()
                 return x
             else:
-                return render_template('index.html', bot_response='Name should only contain alphabets, Please enter your name again')
+                # return render_template(default_template, bot_response='Name should only contain alphabets, Please enter your name again')
+                return json.dumps({"bot_response": 'Name should only contain alphabets, Please enter your name again'})
         if session.get('user_location_check') == 0:
             session['user_location'] = str(request.form['user_input'])
             if session.get('user_location').upper() in (city.upper() for city in world_places_df['city'].values):
@@ -230,7 +237,8 @@ def process():
                 x = get_user_details()
                 return x
             else:
-                return render_template('index.html', bot_response='Please enter correct city name')
+                # return render_template(default_template, bot_response='Please enter correct city name')
+                return json.dumps({"bot_response": 'Please enter correct city name'})
         if session.get('user_age_check') == 0:
             user_age_to_modify = request.form['user_input']
             if user_age_to_modify.isdigit() and 1 <= int(user_age_to_modify) <= 100:
@@ -239,7 +247,8 @@ def process():
                 x = get_user_details()
                 return x
             else:
-                return render_template('index.html', bot_response='Please enter valid age value')
+                # return render_template(default_template, bot_response='Please enter valid age value')
+                return json.dumps({"bot_response": 'Please enter valid age value'})
         if session.get('user_gender_check') == 0:
             user_gender_to_check = str(request.form['user_input'])
             if user_gender_to_check in ['male', 'female', 'other', 'Male', 'Female', 'Other']:
@@ -247,31 +256,36 @@ def process():
                 session['user_gender_check'] = 1
                 session['all_checked_check'] = 1
             else:
-                return render_template('index.html', bot_response='Please ensure gender value is among "Male", "Female" and "Other" ')
-
+                # return render_template(default_template, bot_response='Please ensure gender value is among "Male", "Female" and "Other" ')
+                return json.dumps({"bot_response": 'Please ensure gender value is among "Male", "Female" and "Other" ' })
         if session.get('user_name_check') == 1 and session.get('user_location_check') == 1 and session.get('user_age_check') == 1 and session.get('user_gender_check') == 1:
             print("all checked")
             if session.get('all_checked_check') == 1:
                 default_response = 'Great {}! I can now help you get to know more about Bowhead Health and the services we provide. Also, you can ask information about any medical trial you require.'.format(session.get('user_name'))
                 session['all_checked_check'] = 2
-                return render_template('index.html', bot_response=default_response)
+                # return render_template(default_template, bot_response=default_response)
+                return json.dumps({"bot_response": default_response})
             print('if',session.get('user_name_check'),session.get('user_location_check'),session.get('user_age_check'),session.get('user_gender_check'),session.get('all_checked_check'))
             user_name = session.get('user_name')
             user_location = session.get('user_location')
             user_age = session.get('user_age')
             user_gender = session.get('user_gender')
+
             user_input = request.form['user_input']
             user_input_df = get_text(user_input)
             print(user_name,user_location,user_age,user_gender,user_input_df)
             bot_response_pred = botResponse(user_input_df, user_name, user_location, user_age, user_gender)
             bot_response = bot_response_pred['response']
             bot_pred = bot_response_pred['pred']
-            return render_template('index.html', user_input=user_input, bot_response=bot_response)
+            # return render_template(default_template, user_input=user_input, bot_response=bot_response)
+            return json.dumps({"bot_response": bot_response})
         else:
             print('else',session.get('user_name_check'),session.get('user_location_check'),session.get('user_age_check'),session.get('user_gender_check'),session.get('all_checked_check'))
-            return render_template('index.html', bot_response='Please enter correct values to user details')
+            # return render_template(default_template, bot_response='Please enter correct values to user details')
+            return json.dumps({"bot_response": 'Please enter correct values to user details'})
     else:
-        return render_template('index.html', bot_response='Please initialize the bot before first use')
+        # return render_template(default_template, bot_response='Please initialize the bot before first use')
+        return json.dumps({"bot_response": 'Please initialize the bot before first use'})
 
 
 if __name__ == '__main__':

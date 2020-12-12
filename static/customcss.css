@@ -1,5 +1,13 @@
+.botbody {
+    border: 1px solid black;
+    margin-top:5%;
+    width:950px;
+    margin-left:20%;
+}
+
 .container {
-    margin-top:10%;
+    margin-top:5%;
+    width:950px;
 }
 
 .alert-primary {
@@ -8,11 +16,32 @@
 
 .alert-dark {
     min-width: 218px;
+    width:950px;
+    overflow:auto;
+}
+
+#chatbox {
+    margin-top:10px;
+    height:300px;
+    overflow:auto;
+}
+
+#u_input {
+    display:none;
+}
+
+.options {
+    display:flex;
+}
+
+#send_button {
+    display:none;
+    margin-top:10px;
 }
 
 #voice {
-    background-color:red;
-    margin-left: 100%;
-    padding: 6px 12px;
-    margin-bottom: -5%;
+    display:none;
+    margin-top:10px;
+    background-color:green;
+    margin-left:50px
 }

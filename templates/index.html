@@ -4,35 +4,43 @@
 	<title>Bowhead Health ChatBot</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="./static/customcss.css">
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.1/socket.io.js"></script>
+
 </head>
 <body>
+<div class="botbody">
 <div class="container">
     <div class="title"><h1><b>Bowhead Health Bot</b></h1></div>
 <div class="subtitle">Bowhead Bot's main functionality is to help you find the information about medical trials</div>
     <br>
-    <form action = "/initialize" method="POST">
-<input type="submit" class="btn btn-primary" name="initialize_bot" value="Initialize">
-    </form>
-<br>
-	<div class="alert alert-primary" role="alert">
-User: {{user_input}}
+<!--    <form action = "/initialize" method="GET">-->
+<!--<input id ='initialize_button' type="submit" class="btn btn-primary" name="initialize_bot" value="Initialize">-->
+<!--    </form>-->
+    <button class="btn btn-primary" id="initialize_button" name="initialize_bot" value="Initialize">Initialize</button>
+    <p id="initialize_hint"><b><i>Please initialize the bot before proceeding</i></b></p>
+<br/>
+<div id="chatbox">
+    <div>
+    </div>
+<!--<div class="alert alert-primary" role="alert"> {{user_input}} </div>-->
+<!--<div class="alert alert-dark" role="alert"> {{bot_response|safe}} </div>-->
 </div>
-<div class="alert alert-dark" role="alert">
-    Bowhead Bot: {{ bot_response|safe }}
-</div>
-    <button class="btn btn-primary" id="voice">Talk</button>
 
-    <form  action="/process" method="POST">
-  <div class="form-group">
+<!--    <form  action="/process" method="POST">-->
+<!--  <div class="form-group">-->
     <input type="text" id="u_input" name="user_input" class="form-control"  placeholder="Type your input here"><br>
-  <button type="submit" class="btn btn-primary">Send</button>
+  <div class='options'>
+  <button type="submit" class="btn btn-primary" id="send_button">Send</button>
+  <button class="btn btn-primary" id="voice">Voice</button>
   </div>
-</form>
 
+<!--  </div>-->
+<!--</form>-->
+
+</div>
 </div>
     <script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
