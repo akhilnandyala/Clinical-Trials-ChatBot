@@ -34,8 +34,7 @@ def trial_details(user_condition, location_code, user_location, user_age, user_g
 
     corona_fields = ct.get_study_fields(
         search_expr=search_query,
-        fields=["Gender", "MinimumAge", "MaximumAge", "NCTId", "Condition", "BriefTitle"],
-        # max_studies=50,
+        fields=["Gender", "MinimumAge", "NCTId", "Condition", "BriefTitle"],
         fmt="csv",
     )
 
@@ -53,6 +52,8 @@ def trial_details(user_condition, location_code, user_location, user_age, user_g
             ct_df.drop(i, inplace=True)
         else:
             continue
+
+    ct_df.drop(columns=['Rank'], inplace=True)
     print(ct_df)
 
     if ct_df.empty:
@@ -66,5 +67,5 @@ def trial_details(user_condition, location_code, user_location, user_age, user_g
 
 
 
-# trial_details("Covid", 1, 'Ottawa', '20 years', "Male")
+trial_details("Covid", 1, 'Ottawa', '20 years', "Male")
 
