@@ -22,7 +22,7 @@ original_input_text = ''
 # voice_input_check = 0
 
 def get_pred(encoded_input):
-    model = load_model(Path.joinpath(Path.cwd(), 'model-v2.h5'))
+    model = load_model(Path.joinpath(Path.cwd(), 'model-v3.h5'))
     pred = np.argmax(model.predict(encoded_input))
     return pred
 

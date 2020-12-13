@@ -65,7 +65,5 @@ def trial_details(user_condition, location_code, user_location, user_age, user_g
     print(info)
     return ct_df
 
-
-
-trial_details("Covid", 1, 'Ottawa', '20 years', "Male")
+# trial_details("Covid", 1, 'Ottawa', '20 years', "Male")
 
