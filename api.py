@@ -28,14 +28,14 @@ def trial_details(user_condition, location_code, user_location, user_age, user_g
 
     print(location_code, location_parameter, user_location)
 
-    search_query = '{} AND (SEARCH[Location](AREA[{}]{}) AND AREA[MinimumAge]RANGE[MIN,{}] AND AREA[MaximumAge]RANGE[{},MAX] AND (AREA[Gender]All OR  AREA[Gender]{}))'.format(user_condition, location_parameter, user_location, user_age, user_age, user_gender)
+    search_query = '{} AND (SEARCH[Location](AREA[{}]{}) AND AREA[MinimumAge]RANGE[MIN,{}] AND (AREA[Gender]All OR  AREA[Gender]{}))'.format(user_condition, location_parameter, user_location, user_age, user_gender)
 
     print(search_query)
 
     corona_fields = ct.get_study_fields(
         search_expr=search_query,
         fields=["Gender", "MinimumAge", "MaximumAge", "NCTId", "Condition", "BriefTitle"],
-        max_studies=50,
+        # max_studies=50,
         fmt="csv",
     )
 
@@ -53,14 +53,18 @@ def trial_details(user_condition, location_code, user_location, user_age, user_g
             ct_df.drop(i, inplace=True)
         else:
             continue
+    print(ct_df)
 
     if ct_df.empty:
         ct_df = 'No results found for the medical condition based on given information. You can modify your question or you can re-initialize the bot to modify your preferences. Thank you.'
     else:
         ct_df = ct_df.to_html(escape=False, border=0)
 
-    print(ct_df)
+    info = ct.api_info
+    print(info)
     return ct_df
 
-# trial_details("Breast cancer", 1, 'Ottawa', '20 years', "Male")
+
+
+# trial_details("Covid", 1, 'Ottawa', '20 years', "Male")
 
