@@ -24,6 +24,24 @@ function synthVoice(text) {
   synth.speak(utterance);
 }
 
+window.onload = function exampleFunction() {
+    $.post('/initialize',
+    {
+    initialize_bot: "Initialize",
+  },
+    function(data,status){
+        console.log(typeof data)
+        data_object =  JSON.parse(data);
+        var botText = data_object["bot_response"];
+        $('#chatbox').find(".new-cells").remove();
+        $('#chatbox').append('<div class="alert alert-dark new-cells" role="alert" >' + "<b>Bowhead Bot: </b>" + botText + '</div>');
+        $('#u_input').show();
+        $('#voice').show();
+        $('#send_button').show();
+        $('#initialize_hint').hide();
+        });
+
+}
 $('#initialize_button').click(function(){
     $.post('/initialize',
     {
