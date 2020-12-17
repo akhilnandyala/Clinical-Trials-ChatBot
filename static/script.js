@@ -55,6 +55,9 @@ $('#send_button').click(function(){
         data_object =  JSON.parse(data);
         var botText = data_object["bot_response"];
         $('#chatbox').append('<div class="alert alert-dark new-cells" role="alert">' + "<b>Bowhead Bot: </b>" + botText + '</div>');
+        var element = $('#chatbox div.new-cells:last')[0];
+        console.log(element);
+        element.scrollIntoView();
         });
      $(this).val("");
 
