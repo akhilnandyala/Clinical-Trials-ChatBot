@@ -64,6 +64,10 @@ $('#initialize_button').click(function(){
 $('#send_button').click(function(){
     var userText = $('#u_input').val();
     $('#chatbox').append('<div class="alert alert-primary new-cells" role="alert">' + "<b>User: </b>" + userText + '</div>');
+    var element = $('#chatbox div.new-cells:last')[0];
+    console.log(element);
+    element.scrollIntoView();
+    console.log('success')
     $.post('/process',
     {
     user_input: userText,
@@ -77,9 +81,9 @@ $('#send_button').click(function(){
         console.log(element);
         element.scrollIntoView();
         });
-     $(this).val("");
+    $("#u_input").val("");
 
-            });
+           });
 
 $("#u_input").keypress(function(e) {
   if (e.which == 13) {
