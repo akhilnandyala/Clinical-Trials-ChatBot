@@ -5,6 +5,7 @@ recognition.lang = 'en-US';
 recognition.interimResults = false;
 
 document.getElementById("voice").addEventListener("click", () => {
+  console.log("start listening")
   recognition.start();
 });
 
