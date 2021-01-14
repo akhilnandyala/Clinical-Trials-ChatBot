@@ -49,7 +49,8 @@ def trial_details(user_condition, location_code, user_location, user_age, user_g
         if any(x in r['Condition'].upper() for x in user_condition_word_combo_list):
             continue
         elif not re.search(user_condition, r['Condition'], re.IGNORECASE):
-            ct_df.drop(i, inplace=True)
+            if not user_condition == 'COVID':
+                ct_df.drop(i, inplace=True)
         else:
             continue
 

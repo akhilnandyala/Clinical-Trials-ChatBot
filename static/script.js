@@ -15,7 +15,6 @@ recognition.addEventListener('result', (e) => {
   console.log(text)
   console.log('Confidence: ' + e.results[0][0].confidence);
   document.getElementById("u_input").value = text
-  // We will use the Socket.IO here later…
 });
 
 function synthVoice(text) {

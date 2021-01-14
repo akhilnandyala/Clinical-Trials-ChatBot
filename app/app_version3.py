@@ -1,14 +1,12 @@
-from flask import Flask, render_template, render_template_string, request, session, json
+from flask import Flask, render_template, request, session, json
 import numpy as np
 import pandas as pd
-import preprocessor as p
+from Preprocessor import preprocessor as p
 from tensorflow.keras.models import load_model
 import joblib
 from pathlib import Path
 import re
-import api as api
-import secrets
-
+import clinical_trials_api as api
 
 # load artifacts
 tokenizer_t = joblib.load(Path.joinpath(Path.cwd(), 'tokenizer_t.pkl'))
