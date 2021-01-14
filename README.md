@@ -25,5 +25,5 @@ To test the bot on your local machine:
 An active version of the bot is available at 
 https://blooming-earth-31686.herokuapp.com/
 
-After answering the requested questions, you can ask for clinical trials data such as 'Show me some covid trials available in Vancouver' or 'Find me some cancer trials in California'. Relevant clinical trials available in the mentioned location will be preseneted to users.
+After answering the requested questions, you can ask for clinical trials data such as 'Show me some covid trials available in Vancouver' or 'Find me some cancer trials in California'. Relevant clinical trials available in the mentioned location will be presented to users.
 
